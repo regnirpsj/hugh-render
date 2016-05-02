@@ -2,10 +2,10 @@
 Hull University Graphics Helper (HUGH) Rendering
 ================================================
 
-.. image:: https://travis-ci.org/regnirpsj/hugh-render-sw.svg?branch=master
-   :target: https://travis-ci.org/regnirpsj/hugh-render-sw
-.. image:: https://coveralls.io/repos/github/regnirpsj/hugh-render-sw/badge.svg?branch=master
-   :target: https://coveralls.io/github/regnirpsj/hugh-render-sw?branch=master
+.. image:: https://travis-ci.org/regnirpsj/hugh-render.svg?branch=master
+   :target: https://travis-ci.org/regnirpsj/hugh-render
+.. image:: https://coveralls.io/repos/github/regnirpsj/hugh-render/badge.svg?branch=master
+   :target: https://coveralls.io/github/regnirpsj/hugh-render?branch=master
 
 :Author: Jan P Springer <regnirpsj@gmail.com>
 
