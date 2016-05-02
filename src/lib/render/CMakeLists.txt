@@ -39,4 +39,4 @@ set(LIB hugh_render)
 cma_setup_library(${LIB} SOURCES ${SRC} DEPENDENCIES ${LIBS} INCDIR hugh/render)
 cma_setup_export(${LIB})
 
-#add_subdirectory(test EXCLUDE_FROM_ALL)
+add_subdirectory(test EXCLUDE_FROM_ALL)
