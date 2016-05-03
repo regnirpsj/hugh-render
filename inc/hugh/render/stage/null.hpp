@@ -39,8 +39,8 @@ namespace hugh {
         explicit null(context::device&);
         virtual ~null();
 
-        virtual void invalidate()                             =0;
-        virtual void resize    (glm::uvec2 const& /* size */) =0;
+        virtual void invalidate();
+        virtual void resize    (glm::uvec2 const& /* size */);
 
       protected:        
 
