@@ -14,7 +14,8 @@
 
 // includes, system
 
-//#include <>
+#include <memory>  // std::unique_ptr<>
+#include <sstream> // std::ostringstream
 
 // includes, project
 
@@ -31,6 +32,28 @@ namespace {
   
   // types, internal (class, enum, struct, union, typedef)
 
+  class dev_ctx : public hugh::render::context::device {
+
+  public:
+
+    explicit dev_ctx(glm::uvec2 const& a = glm::uvec2(1,1))
+      : hugh::render::context::base  (a),
+        hugh::render::context::device(a)
+    {}
+    
+  };
+  
+  class swp_ctx : public hugh::render::context::swap {
+
+  public:
+
+    explicit swp_ctx(glm::uvec2 const& a = glm::uvec2(1,1))
+      : hugh::render::context::base(a),
+        hugh::render::context::swap(a)
+    {}
+    
+  };
+  
   // variables, internal
   
   // functions, internal
@@ -40,7 +63,72 @@ namespace {
 #define BOOST_TEST_MAIN
 #include <boost/test/unit_test.hpp>
 
-BOOST_AUTO_TEST_CASE(test_hugh_render_context)
+BOOST_AUTO_TEST_CASE(test_hugh_render_context_device_ctor)
 {
-  BOOST_CHECK(true);
+  using namespace hugh::render;
+
+  std::unique_ptr<context::base> const ctx(new dev_ctx);
+  
+  BOOST_CHECK(nullptr != ctx);
+}
+
+BOOST_AUTO_TEST_CASE(test_hugh_render_context_device_print_on)
+{
+  using namespace hugh::render;
+
+  std::unique_ptr<context::base> const ctx(new dev_ctx);
+  std::ostringstream                   ostr;
+
+  ostr << *ctx;
+
+  BOOST_CHECK       (!ostr.str().empty());
+  BOOST_TEST_MESSAGE( ostr.str());
+}
+
+BOOST_AUTO_TEST_CASE(test_hugh_render_context_device_size)
+{
+  using namespace hugh::render;
+
+  glm::uvec2 const               s1  (12,34);
+  glm::uvec2 const               s2  (56,78);
+  std::unique_ptr<context::base> ctx(new dev_ctx(s1));
+  
+  BOOST_CHECK(s1 == ctx->size());
+  BOOST_CHECK(s1 == ctx->size(s2));
+  BOOST_CHECK(s2 == ctx->size());
+}
+
+BOOST_AUTO_TEST_CASE(test_hugh_render_context_swap_ctor)
+{
+  using namespace hugh::render;
+
+  std::unique_ptr<context::base> const ctx(new swp_ctx);
+  
+  BOOST_CHECK(nullptr != ctx);
+}
+
+BOOST_AUTO_TEST_CASE(test_hugh_render_context_swap_print_on)
+{
+  using namespace hugh::render;
+
+  std::unique_ptr<context::base> const ctx(new swp_ctx);
+  std::ostringstream                   ostr;
+
+  ostr << *ctx;
+
+  BOOST_CHECK       (!ostr.str().empty());
+  BOOST_TEST_MESSAGE( ostr.str());
+}
+
+BOOST_AUTO_TEST_CASE(test_hugh_render_context_swap_size)
+{
+  using namespace hugh::render;
+
+  glm::uvec2 const               s1  (12,34);
+  glm::uvec2 const               s2  (56,78);
+  std::unique_ptr<context::base> ctx(new swp_ctx(s1));
+  
+  BOOST_CHECK(s1 == ctx->size());
+  BOOST_CHECK(s1 == ctx->size(s2));
+  BOOST_CHECK(s2 == ctx->size());
 }
