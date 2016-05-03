@@ -28,7 +28,7 @@ list(APPEND SRC stage/base.cpp)
 list(APPEND SRC stage/null.cpp)
 list(APPEND SRC window/base.cpp)
 
-add_definitions(-DHUGH_ALL_TRACE)
+#add_definitions(-DHUGH_ALL_TRACE)
 
 set(LIBS)
 list(APPEND LIBS ${HUGH_LIBRARIES})
