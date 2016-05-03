@@ -119,7 +119,7 @@ namespace hugh {
         : support::printable       (),
           support::refcounted<base>(),
           ctx_                     (a),
-          active_                  ()
+          active_                  (true)
       {
         TRACE("hugh::render::stage::base::base");
       }
