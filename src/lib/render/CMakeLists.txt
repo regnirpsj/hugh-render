@@ -21,11 +21,17 @@ set(SRC)
 list(APPEND SRC context/base.cpp)
 list(APPEND SRC context/device.cpp)
 list(APPEND SRC context/swap.cpp)
+
 list(APPEND SRC pass/base.cpp)
 list(APPEND SRC pass/container.cpp)
 list(APPEND SRC pass/null.cpp)
+
 list(APPEND SRC stage/base.cpp)
 list(APPEND SRC stage/null.cpp)
+
+list(APPEND SRC statistics/base.cpp)
+list(APPEND SRC statistics/cpu.cpp)
+
 list(APPEND SRC window/base.cpp)
 
 #add_definitions(-DHUGH_ALL_TRACE)

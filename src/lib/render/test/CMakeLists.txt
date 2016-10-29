@@ -13,10 +13,12 @@ find_package(Boost ${BOOST_MINIMUM_VERSION} REQUIRED COMPONENTS unit_test_framew
 include_directories(SYSTEM ${Boost_INLCUDE_DIR})
 
 set(SRC)
+list(APPEND SRC compile.cpp)
 list(APPEND SRC context.cpp)
 list(APPEND SRC pass_container.cpp)
 list(APPEND SRC pass_null.cpp)
 list(APPEND SRC stage_null.cpp)
+list(APPEND SRC statistics_cpu.cpp)
 list(APPEND SRC window.cpp)
 
 # add_definitions(-DHUGH_ALL_TRACE)
