@@ -6,15 +6,11 @@
 /*                                                                                                */
 /**************************************************************************************************/
 /*                                                                                                */
-/*  module     :  hugh/render/stages.hpp                                                          */
+/*  module     :  hugh/render/test/compile.cpp                                                    */
 /*  project    :                                                                                  */
 /*  description:                                                                                  */
 /*                                                                                                */
 /**************************************************************************************************/
-
-#if !defined(HUGH_RENDER_STAGES_HPP)
-
-#define HUGH_RENDER_STAGES_HPP
 
 // includes, system
 
@@ -22,22 +18,32 @@
 
 // includes, project
 
-#include <hugh/render/stage/null.hpp>
+#include <hugh/render/context.hpp>
+#include <hugh/render/passes.hpp>
+#include <hugh/render/stages.hpp>
+#include <hugh/render/statistics.hpp>
+#include <hugh/render/windows.hpp>
 
-namespace hugh {
+#define HUGH_USE_TRACE
+#undef HUGH_USE_TRACE
+#include <hugh/support/trace.hpp>
+
+// internal unnamed namespace
+
+namespace {
   
-  namespace render {
+  // types, internal (class, enum, struct, union, typedef)
 
-    // types, exported (class, enum, struct, union, typedef)
-
-    // variables, exported (extern)
-
-    // functions, inlined (inline)
+  // variables, internal
   
-    // functions, exported (extern)
+  // functions, internal
 
-  } // namespace render {
-  
-} // namespace hugh {
+} // namespace {
 
-#endif // #if !defined(HUGH_RENDER_STAGES_HPP)
+#define BOOST_TEST_MAIN
+#include <boost/test/unit_test.hpp>
+
+BOOST_AUTO_TEST_CASE(test_hugh_render_compile)
+{
+  BOOST_CHECK(true);
+}

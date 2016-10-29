@@ -22,7 +22,7 @@
 
 // includes, project
 
-#include <hugh/render/windows/base.hpp>
+#include <hugh/render/window/base.hpp>
 
 namespace hugh {
   
