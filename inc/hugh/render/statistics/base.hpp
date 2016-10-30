@@ -46,8 +46,6 @@ namespace hugh {
         public:
 
           virtual ~data();
-        
-          virtual data& operator+=(data const&);
 
           virtual void print_on(std::ostream&) const;
         

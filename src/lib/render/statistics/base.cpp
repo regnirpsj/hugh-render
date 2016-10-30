@@ -56,14 +56,6 @@ namespace hugh {
         TRACE("hugh::render::statistics::base::data::~data");
       }
 
-      /* virtual */ base::data&
-      base::data::operator+=(base::data const&)
-      {
-        TRACE("hugh::render::statistics::base::data::operator+=");
-
-        return *this;
-      }
-
       /* virtual */ void
       base::data::print_on(std::ostream& os) const
       {

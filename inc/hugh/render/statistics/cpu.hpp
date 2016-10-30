@@ -45,11 +45,9 @@ namespace hugh {
           double time_in_ns;
         
           virtual ~data();
-        
-          virtual data& operator+=(data const&);
 
           virtual void print_on(std::ostream&) const;
-        
+
         };
         
         explicit cpu();
