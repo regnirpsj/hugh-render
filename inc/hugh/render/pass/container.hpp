@@ -43,9 +43,6 @@ namespace hugh {
         bool add(stage::base*);
         bool sub(stage::base*);
         
-        virtual void invalidate();
-        virtual void resize    (glm::uvec2 const& /* size */);
-        
         virtual void print_on(std::ostream&) const;
 
       protected:
@@ -54,8 +51,10 @@ namespace hugh {
 
         render_stage_list_type stages_;
         
-        virtual void do_execute(context::swap&);
-        
+        virtual void do_execute   (context::swap&);
+        virtual void do_invalidate();
+        virtual void do_resize    (glm::uvec2 const& /* size */);
+
       };
     
       // variables, exported (extern)

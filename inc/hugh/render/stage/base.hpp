@@ -18,12 +18,14 @@
 
 // includes, system
 
-//#include <>
+#include <memory>        // std::unique_ptr<>
+#include <unordered_map> // std::unordered_map<>
 
 // includes, project
 
 #include <hugh/render/context/device.hpp>
 #include <hugh/render/context/swap.hpp>
+#include <hugh/render/statistics/cpu.hpp>
 
 namespace hugh {
 
@@ -40,24 +42,33 @@ namespace hugh {
       
         virtual ~base();
 
-        void execute(context::swap&);
+        void execute   (context::swap&);
+        void invalidate();
+        void resize    (glm::uvec2 const& /* size */);
 
         bool const& active() const;
         bool        active(bool);
         
-        virtual void invalidate()                             =0;
-        virtual void resize    (glm::uvec2 const& /* size */) =0;
 
         virtual void print_on(std::ostream&) const;
 
       protected:
 
-        context::device& ctx_;
-        bool             active_;
+        enum class stats {
+          execute = 0, invalidate = 1, resize = 2
+        };
+
+        using statistics_cpu_map_type = std::unordered_map<stats, std::unique_ptr<statistics::cpu>>;
+        
+        context::device&        ctx_;
+        bool                    active_;
+        statistics_cpu_map_type stats_cpu_;
         
         explicit base(context::device&);
 
         virtual void do_execute(context::swap&) =0;
+        virtual void do_invalidate();
+        virtual void do_resize    (glm::uvec2 const& /* size */);
         
       };
     

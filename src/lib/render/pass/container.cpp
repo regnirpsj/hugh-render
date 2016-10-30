@@ -97,27 +97,7 @@ namespace hugh {
         }
         
         return result;
-      }
-      
-      /* virtual */ void
-      container::invalidate()
-      {
-        TRACE("hugh::render::pass::container::invalidate");
-
-        for (auto& s : stages_) {
-          s->invalidate();
-        }
-      }
-
-      /* virtual */ void
-      container::resize(glm::uvec2 const& a)
-      {
-        TRACE("hugh::render::pass::container::resize");
-
-        for (auto& s : stages_) {
-          s->resize(a);
-        }
-      }
+      }      
 
       /* virtual */ void
       container::print_on(std::ostream& os) const
@@ -144,6 +124,26 @@ namespace hugh {
         }
       }
       
+      /* virtual */ void
+      container::do_invalidate()
+      {
+        TRACE("hugh::render::pass::container::do_invalidate");
+
+        for (auto& s : stages_) {
+          s->invalidate();
+        }
+      }
+
+      /* virtual */ void
+      container::do_resize(glm::uvec2 const& a)
+      {
+        TRACE("hugh::render::pass::container::do_resize");
+
+        for (auto& s : stages_) {
+          s->resize(a);
+        }
+      }
+
     } // namespace pass {
 
   } // namespace render {

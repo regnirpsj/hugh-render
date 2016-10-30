@@ -61,9 +61,31 @@ namespace hugh {
       {
         TRACE("hugh::render::stage::base::execute");
 
+        statistics::guard const sg(*stats_cpu_[stats::execute]);
+
         if (active_) {
           do_execute(a);
         }
+      }
+      
+      /* virtual */ void
+      base::invalidate()
+      {
+        TRACE("hugh::render::stage::base::invalidate");
+
+        statistics::guard const sg(*stats_cpu_[stats::invalidate]);
+
+        do_invalidate();
+      }
+
+      /* virtual */ void
+      base::resize(glm::uvec2 const& a)
+      {
+        TRACE("hugh::render::stage::base::resize");
+
+        statistics::guard const sg(*stats_cpu_[stats::resize]);
+
+        do_resize(a);
       }
 
       bool const&
@@ -87,31 +109,17 @@ namespace hugh {
       }
 
       /* virtual */ void
-      base::invalidate()
-      {
-        TRACE("hugh::render::stage::base::invalidate");
-
-        throw std::logic_error("pure virtual function "
-                               "'hugh::render::stage::base::invalidate'"
-                               " called");
-      }
-
-      /* virtual */ void
-      base::resize(glm::uvec2 const&)
-      {
-        TRACE("hugh::render::stage::base::resize");
-
-        throw std::logic_error("pure virtual function "
-                               "'hugh::render::stage::base::resize'"
-                               " called");
-      }
-
-      /* virtual */ void
       base::print_on(std::ostream& os) const
       {
         TRACE_NEVER("hugh::render::stage::base::print_on");
 
-        os << '[' << ctx_ << ',' << ((active_) ? "" : "!") << "active" << ']';
+        os << '['
+           << ctx_                                                    << ','
+           << ((active_) ? "" : "!") << "active"                      << ','
+           << "exec:" << *(stats_cpu_.at(stats::execute)   ->fetch()) << ','
+           << "invd:" << *(stats_cpu_.at(stats::invalidate)->fetch()) << ','
+           << "resz:" << *(stats_cpu_.at(stats::resize)    ->fetch())
+           << ']';
       }
 
       /* explicit */
@@ -119,9 +127,14 @@ namespace hugh {
         : support::printable       (),
           support::refcounted<base>(),
           ctx_                     (a),
-          active_                  (true)
+          active_                  (true),
+          stats_cpu_               ()
       {
         TRACE("hugh::render::stage::base::base");
+
+        stats_cpu_[stats::execute]   .reset(new statistics::cpu);
+        stats_cpu_[stats::invalidate].reset(new statistics::cpu);
+        stats_cpu_[stats::resize]    .reset(new statistics::cpu);
       }
 
       /* virtual */ void
@@ -134,6 +147,18 @@ namespace hugh {
                                " called");
       }
       
+      /* virtual */ void
+      base::do_invalidate()
+      {
+        TRACE("hugh::render::stage::base::do_invalidate");
+      }
+
+      /* virtual */ void
+      base::do_resize(glm::uvec2 const&)
+      {
+        TRACE("hugh::render::stage::base::do_resize");
+      }
+
     } // namespace stage {
 
   } // namespace render {

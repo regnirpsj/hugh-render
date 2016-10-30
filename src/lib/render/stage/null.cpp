@@ -61,19 +61,7 @@ namespace hugh {
       null::~null()
       {
         TRACE("hugh::render::stage::null::~null");
-      }
-      
-      /* virtual */ void
-      null::invalidate()
-      {
-        TRACE("hugh::render::stage::null::invalidate");
-      }
-
-      /* virtual */ void
-      null::resize(glm::uvec2 const&)
-      {
-        TRACE("hugh::render::stage::null::resize");
-      }
+      }      
       
       /* virtual */ void
       null::do_execute(context::swap&)
@@ -81,6 +69,18 @@ namespace hugh {
         TRACE("hugh::render::stage::null::do_execute");
       }
 
+      /* virtual */ void
+      null::do_invalidate()
+      {
+        TRACE("hugh::render::stage::null::do_invalidate");
+      }
+
+      /* virtual */ void
+      null::do_resize(glm::uvec2 const&)
+      {
+        TRACE("hugh::render::stage::null::do_resize");
+      }
+      
     } // namespace stage {
 
   } // namespace render {
