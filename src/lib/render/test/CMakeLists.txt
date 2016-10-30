@@ -21,7 +21,7 @@ list(APPEND SRC stage_null.cpp)
 list(APPEND SRC statistics_cpu.cpp)
 list(APPEND SRC window.cpp)
 
-# add_definitions(-DHUGH_ALL_TRACE)
+#add_definitions(-DHUGH_ALL_TRACE)
 
 set(LIBS)
 list(APPEND LIBS ${LIB})
