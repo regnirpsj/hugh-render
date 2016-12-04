@@ -14,7 +14,7 @@
 
 // includes, system
 
-//#include <>
+#include <memory>  // std::unique_ptr<>
 
 // includes, project
 
@@ -40,8 +40,7 @@ namespace {
   public:
 
     explicit ds_context(glm::uvec2 const& a = glm::uvec2(1,1))
-      : hugh::render::context::base  (a),
-        hugh::render::context::device(a),
+      : hugh::render::context::device(),
         hugh::render::context::swap  (a)
     {}
     
@@ -60,21 +59,24 @@ BOOST_AUTO_TEST_CASE(test_hugh_render_pass_container_ctor)
 {
   using namespace hugh::render;
 
-  ds_context      c;
-  pass::container n(c);
+  ds_context                       c;
+  std::unique_ptr<pass::container> pc(new pass::container(c));
   
-  BOOST_CHECK(true);
+  BOOST_CHECK(nullptr != pc);
 }
 
 BOOST_AUTO_TEST_CASE(test_hugh_render_pass_container_print_on)
 {
   using namespace hugh::render;
 
-  ds_context         c;
-  pass::container    pc(c);
+  ds_context                       c;
+  std::unique_ptr<pass::container> pc(new pass::container(c));
+  
+  BOOST_CHECK(nullptr != pc);
+
   std::ostringstream ostr;
 
-  ostr << pc;
+  ostr << *pc;
 
   BOOST_CHECK       (!ostr.str().empty());
   BOOST_TEST_MESSAGE( ostr.str());
@@ -85,61 +87,63 @@ BOOST_AUTO_TEST_CASE(test_hugh_render_pass_container_execute)
   using namespace hugh::render;
 
   ds_context      c;
-  pass::container pc(c);
-
-  pc.invalidate();
-  pc.resize    (c.size());
-  pc.execute   (c);
+  std::unique_ptr<pass::container> pc(new pass::container(c));
   
-  BOOST_CHECK(true);
+  BOOST_CHECK(nullptr != pc);
+
+  pc->invalidate();
+  pc->resize    (*c.size);
+  pc->execute   (c);
 }
 
 BOOST_AUTO_TEST_CASE(test_hugh_render_pass_container_add_sub)
 {
   using namespace hugh::render;
 
-  ds_context      c;
-  pass::container pc(c);
+  ds_context                       c;
+  std::unique_ptr<pass::container> pc(new pass::container(c));
+  
+  BOOST_CHECK(nullptr != pc);
 
   {
     boost::intrusive_ptr<stage::base> s(new stage::null(c));
 
-    pc.add(s.get());
+    pc->add(s.get());
 
     {
       boost::intrusive_ptr<pass::base> p(new pass::null(c));
 
-      pc.add(p.get());
-      pc.add(p.get());
+      pc->add(p.get());
+      pc->add(p.get());
       
       {
         std::ostringstream ostr;
 
-        ostr << pc;
+        ostr << *pc;
 
         BOOST_CHECK       (!ostr.str().empty());
         BOOST_TEST_MESSAGE( ostr.str());
       }
 
-      pc.invalidate();
-      pc.resize    (c.size());
-      pc.execute   (c);
+      pc->invalidate();
+      pc->resize    (*c.size);
+      pc->execute   (c);
 
-      pc.active(false);
+      pc->active(false);
 
-      pc.invalidate();
-      pc.resize    (c.size());
-      pc.execute   (c);
+      pc->invalidate();
+      pc->resize    (*c.size);
+      pc->execute   (c);
     }
 
-    pc.sub(s.get());
-    pc.sub(s.get());
+    pc->sub(s.get());
+    pc->sub(s.get());
   }
 
   {
     std::ostringstream ostr;
 
-    ostr << pc;
+    ostr << *pc;
 
     BOOST_CHECK       (!ostr.str().empty());
     BOOST_TEST_MESSAGE( ostr.str());

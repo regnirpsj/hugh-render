@@ -10,7 +10,7 @@ cma_print_current_directory()
 
 find_package(Boost ${BOOST_MINIMUM_VERSION} REQUIRED)
 find_package(GLM   ${GLM_MINIMUM_VERSION}   REQUIRED)
-find_package(HUGH                           REQUIRED COMPONENTS support)
+find_package(HUGH                           REQUIRED COMPONENTS field support)
 
 include_directories(SYSTEM ${Boost_INCLUDE_DIR})
 include_directories(SYSTEM ${GLM_INCLUDE_DIR})

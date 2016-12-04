@@ -18,7 +18,8 @@
 
 // includes, system
 
-//#include <>
+#include <glm/gtx/io.hpp> // glm::operator<<
+#include <ostream>        // std::ostream
 
 // includes, project
 
@@ -58,7 +59,8 @@ namespace hugh {
       
       /* explicit */
       swap::swap(glm::uvec2 const& a)
-        : base(a)
+        : base(),
+          size(*this, "size", a)
       {
         TRACE("hugh::render::context::swap::swap");
       }

@@ -18,8 +18,7 @@
 
 // includes, system
 
-#include <glm/gtx/io.hpp> // glm::operator<<
-#include <ostream>        // std::ostream
+//#include <>
 
 // includes, project
 
@@ -55,41 +54,12 @@ namespace hugh {
       base::~base()
       {
         TRACE("hugh::render::context::base::~base");
-      }
-      
-      /* virtual */ glm::uvec2 const&
-      base::size() const
-      {
-        TRACE("hugh::render::context::base::size(get)");
-
-        return size_;
-      }
-
-      /* virtual */ glm::uvec2
-      base::size(glm::uvec2 const& a)
-      {
-        TRACE("hugh::render::context::base::size(set)");
-
-        glm::uvec2 const result(size_);
-
-        size_ = a;
-        
-        return result;
-      }
-
-      /* virtual */ void
-      base::print_on(std::ostream& os) const
-      {
-        TRACE_NEVER("hugh::render::context::base::print_on");
-
-        os << '[' << size() << ']';
-      }
+      }      
       
       /* explicit */
-      base::base(glm::uvec2 const& a)
-        : support::printable       (),
-          support::refcounted<base>(),
-          size_                    (a)
+      base::base()
+        : field::container         (),
+          support::refcounted<base>()
       {
         TRACE("hugh::render::context::base::base");
       }

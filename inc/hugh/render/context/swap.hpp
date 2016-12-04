@@ -18,7 +18,7 @@
 
 // includes, system
 
-//#include <>
+#include <glm/glm.hpp> // glm::*
 
 // includes, project
 
@@ -35,13 +35,15 @@ namespace hugh {
       class HUGH_RENDER_EXPORT swap : virtual public base {
 
       public:
-      
-        virtual ~swap() =0;
-      
-      protected:
 
+        field::value::single<glm::uvec2> size; //< size
+
+        virtual ~swap() =0;
+        
+      protected:
+        
         explicit swap(glm::uvec2 const&);
-      
+        
       };
     
       // variables, exported (extern)

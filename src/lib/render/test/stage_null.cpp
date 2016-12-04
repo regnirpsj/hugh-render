@@ -14,6 +14,7 @@
 
 // includes, system
 
+#include <memory>  // std::unique_ptr<>
 #include <sstream> // std::ostringstream
 
 // includes, project
@@ -38,8 +39,7 @@ namespace {
   public:
 
     explicit ds_context(glm::uvec2 const& a = glm::uvec2(1,1))
-      : hugh::render::context::base  (a),
-        hugh::render::context::device(a),
+      : hugh::render::context::device(),
         hugh::render::context::swap  (a)
     {}
     
@@ -58,21 +58,24 @@ BOOST_AUTO_TEST_CASE(test_hugh_render_stage_null_ctor)
 {
   using namespace hugh::render;
 
-  ds_context  c;
-  stage::null n(c);
+  ds_context                   c;
+  std::unique_ptr<stage::null> sn(new stage::null(c));
   
-  BOOST_CHECK(true);
+  BOOST_CHECK(nullptr != sn);
 }
 
 BOOST_AUTO_TEST_CASE(test_hugh_render_stage_null_print_on)
 {
   using namespace hugh::render;
 
-  ds_context         c;
-  stage::null        n(c);
+  ds_context                   c;
+  std::unique_ptr<stage::null> sn(new stage::null(c));
+
+  BOOST_CHECK(nullptr != sn);
+  
   std::ostringstream ostr;
 
-  ostr << n;
+  ostr << *sn;
 
   BOOST_CHECK       (!ostr.str().empty());
   BOOST_TEST_MESSAGE( ostr.str());
@@ -82,24 +85,26 @@ BOOST_AUTO_TEST_CASE(test_hugh_render_stage_null_active)
 {
   using namespace hugh::render;
 
-  ds_context  c;
-  stage::null n(c);
+  ds_context                   c;
+  std::unique_ptr<stage::null> sn(new stage::null(c));
 
-  BOOST_CHECK(true == n.active());
-  BOOST_CHECK(true == n.active(false));
-  BOOST_CHECK(false == n.active());
+  BOOST_CHECK(nullptr != sn);
+  
+  BOOST_CHECK( true == sn->active());
+  BOOST_CHECK( true == sn->active(false));
+  BOOST_CHECK(false == sn->active());
 }
 
 BOOST_AUTO_TEST_CASE(test_hugh_render_stage_null_execute)
 {
   using namespace hugh::render;
 
-  ds_context  c;
-  stage::null n(c);
+  ds_context                   c;
+  std::unique_ptr<stage::null> sn(new stage::null(c));
 
-  n.invalidate();
-  n.resize    (c.size());
-  n.execute   (c);
-  
-  BOOST_CHECK(true);
+  BOOST_CHECK(nullptr != sn);
+
+  sn->invalidate();
+  sn->resize    (*c.size);
+  sn->execute   (c);
 }

@@ -36,9 +36,8 @@ namespace {
 
   public:
 
-    explicit dev_ctx(glm::uvec2 const& a = glm::uvec2(1,1))
-      : hugh::render::context::base  (a),
-        hugh::render::context::device(a)
+    explicit dev_ctx()
+      : hugh::render::context::device()
     {}
     
   };
@@ -48,8 +47,7 @@ namespace {
   public:
 
     explicit swp_ctx(glm::uvec2 const& a = glm::uvec2(1,1))
-      : hugh::render::context::base(a),
-        hugh::render::context::swap(a)
+      : hugh::render::context::swap(a)
     {}
     
   };
@@ -85,19 +83,6 @@ BOOST_AUTO_TEST_CASE(test_hugh_render_context_device_print_on)
   BOOST_TEST_MESSAGE( ostr.str());
 }
 
-BOOST_AUTO_TEST_CASE(test_hugh_render_context_device_size)
-{
-  using namespace hugh::render;
-
-  glm::uvec2 const               s1  (12,34);
-  glm::uvec2 const               s2  (56,78);
-  std::unique_ptr<context::base> ctx(new dev_ctx(s1));
-  
-  BOOST_CHECK(s1 == ctx->size());
-  BOOST_CHECK(s1 == ctx->size(s2));
-  BOOST_CHECK(s2 == ctx->size());
-}
-
 BOOST_AUTO_TEST_CASE(test_hugh_render_context_swap_ctor)
 {
   using namespace hugh::render;
@@ -126,9 +111,11 @@ BOOST_AUTO_TEST_CASE(test_hugh_render_context_swap_size)
 
   glm::uvec2 const               s1  (12,34);
   glm::uvec2 const               s2  (56,78);
-  std::unique_ptr<context::base> ctx(new swp_ctx(s1));
+  std::unique_ptr<context::swap> ctx(new swp_ctx(s1));
   
-  BOOST_CHECK(s1 == ctx->size());
-  BOOST_CHECK(s1 == ctx->size(s2));
-  BOOST_CHECK(s2 == ctx->size());
+  BOOST_CHECK(s1 == *ctx->size);
+
+  ctx->size = s2;
+  
+  BOOST_CHECK(s2 == *ctx->size);
 }

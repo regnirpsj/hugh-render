@@ -35,12 +35,12 @@ namespace hugh {
       class HUGH_RENDER_EXPORT device : virtual public base {
 
       public:
-      
+
         virtual ~device() =0;
-      
+        
       protected:
 
-        explicit device(glm::uvec2 const&);
+        explicit device();
       
       };
     

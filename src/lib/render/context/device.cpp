@@ -57,8 +57,8 @@ namespace hugh {
       }
       
       /* explicit */
-      device::device(glm::uvec2 const& a)
-        : base(a)
+      device::device()
+        : base()
       {
         TRACE("hugh::render::context::device::device");
       }

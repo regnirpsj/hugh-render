@@ -169,9 +169,9 @@ namespace hugh {
         }
 
         { // 2.1 + 2.2
-          dev_ctx_->size(a);
+          // dev_ctx_->size(a);
           // 2.3
-          swp_ctx_->size(a);
+          swp_ctx_->size = a;
         }
 
         // 3

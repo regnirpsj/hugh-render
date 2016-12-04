@@ -14,6 +14,7 @@
 
 // includes, system
 
+#include <memory>  // std::unique_ptr<>
 #include <sstream> // std::ostringstream
 
 // includes, project
@@ -38,8 +39,7 @@ namespace {
   public:
 
     explicit ds_context(glm::uvec2 const& a = glm::uvec2(1,1))
-      : hugh::render::context::base  (a),
-        hugh::render::context::device(a),
+      : hugh::render::context::device(),
         hugh::render::context::swap  (a)
     {}
     
@@ -58,21 +58,24 @@ BOOST_AUTO_TEST_CASE(test_hugh_render_pass_null_ctor)
 {
   using namespace hugh::render;
 
-  ds_context c;
-  pass::null n(c);
+  ds_context                  c;
+  std::unique_ptr<pass::null> pn(new pass::null(c));
   
-  BOOST_CHECK(true);
+  BOOST_CHECK(nullptr != pn);
 }
 
 BOOST_AUTO_TEST_CASE(test_hugh_render_pass_null_print_on)
 {
   using namespace hugh::render;
 
-  ds_context         c;
-  pass::null         n(c);
+  ds_context                  c;
+  std::unique_ptr<pass::null> pn(new pass::null(c));
+  
+  BOOST_CHECK(nullptr != pn);
+
   std::ostringstream ostr;
 
-  ostr << n;
+  ostr << *pn;
 
   BOOST_CHECK       (!ostr.str().empty());
   BOOST_TEST_MESSAGE( ostr.str());
@@ -82,12 +85,14 @@ BOOST_AUTO_TEST_CASE(test_hugh_render_pass_null_active)
 {
   using namespace hugh::render;
 
-  ds_context c;
-  pass::null n(c);
+  ds_context                  c;
+  std::unique_ptr<pass::null> pn(new pass::null(c));
+  
+  BOOST_CHECK(nullptr != pn);
 
-  BOOST_CHECK(true == n.active());
-  BOOST_CHECK(true == n.active(false));
-  BOOST_CHECK(false == n.active());
+  BOOST_CHECK( true == pn->active());
+  BOOST_CHECK( true == pn->active(false));
+  BOOST_CHECK(false == pn->active());
 }
 
 BOOST_AUTO_TEST_CASE(test_hugh_render_pass_null_execute)
@@ -95,11 +100,11 @@ BOOST_AUTO_TEST_CASE(test_hugh_render_pass_null_execute)
   using namespace hugh::render;
 
   ds_context c;
-  pass::null n(c);
-
-  n.invalidate();
-  n.resize    (c.size());
-  n.execute   (c);
+  std::unique_ptr<pass::null> pn(new pass::null(c));
   
-  BOOST_CHECK(true);
+  BOOST_CHECK(nullptr != pn);
+
+  pn->invalidate();
+  pn->resize    (*c.size);
+  pn->execute   (c);
 }

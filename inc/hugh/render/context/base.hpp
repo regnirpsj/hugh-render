@@ -18,12 +18,13 @@
 
 // includes, system
 
-#include <glm/glm.hpp>
+//#include <>
 
 // includes, project
 
+#include <hugh/field/container.hpp>
+#include <hugh/field/value/single.hpp>
 #include <hugh/render/export.h>
-#include <hugh/support/printable.hpp>
 #include <hugh/support/refcounted.hpp>
 
 namespace hugh {
@@ -34,23 +35,16 @@ namespace hugh {
       
       // types, exported (class, enum, struct, union, typedef)
 
-      class HUGH_RENDER_EXPORT base : public support::printable,
+      class HUGH_RENDER_EXPORT base : public field::container,
                                       public support::refcounted<base> {
 
       public:
         
         virtual ~base() =0;
-
-        virtual glm::uvec2 const& size() const;
-        virtual glm::uvec2        size(glm::uvec2 const&);
-     
-        virtual void print_on(std::ostream&) const;
  
       protected:
 
-        glm::uvec2 size_;
-
-        explicit base(glm::uvec2 const&);
+        explicit base();
       
       };
     
