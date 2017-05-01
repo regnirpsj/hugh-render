@@ -2,19 +2,19 @@
 
 /**************************************************************************************************/
 /*                                                                                                */
-/* Copyright (C) 2016 University of Hull                                                          */
+/* Copyright (C) 2017 University of Hull                                                          */
 /*                                                                                                */
 /**************************************************************************************************/
 /*                                                                                                */
-/*  module     :  hugh/render/stage/null.hpp                                                      */
+/*  module     :  hugh/rener/null/context.hpp                                                     */
 /*  project    :                                                                                  */
 /*  description:                                                                                  */
 /*                                                                                                */
 /**************************************************************************************************/
 
-#if !defined(HUGH_RENDER_STAGE_NULL_HPP)
+#if !defined(HUGH_RENDER_NULL_CONTEXT_HPP)
 
-#define HUGH_RENDER_STAGE_NULL_HPP
+#define HUGH_RENDER_NULL_CONTEXT_HPP
 
 // includes, system
 
@@ -22,41 +22,37 @@
 
 // includes, project
 
-#include <hugh/render/stage/base.hpp>
+#include <hugh/render/context/device.hpp>
+#include <hugh/render/context/swap.hpp>
 
 namespace hugh {
 
   namespace render {
 
-    namespace stage {
+    namespace null {
       
       // types, exported (class, enum, struct, union, typedef)
 
-      class HUGH_RENDER_EXPORT null : public base {
+      class HUGH_RENDER_EXPORT context final : public render::context::device,
+                                               public render::context::swap {
 
       public:
 
-        explicit null(context::device&);
-        virtual ~null();
-
-      protected:        
-
-        virtual void do_execute   (context::swap&);
-        virtual void do_invalidate();
-        virtual void do_resize    (glm::uvec2 const& /* size */);
-
+        explicit context(glm::uvec2 const& = glm::uvec2(1, 1));
+        virtual ~context();
+        
       };
-    
+      
       // variables, exported (extern)
 
       // functions, inlined (inline)
   
       // functions, exported (extern)
 
-    } // namespace stage {
-        
-  } // namespace render {
+    } //namespace null {
+
+  } // namespace null {
   
 } // namespace hugh {
 
-#endif // #if !defined(HUGH_RENDER_STAGE_NULL_HPP)
+#endif // #if !defined(HUGH_RENDER_NULL_CONTEXT_HPP)

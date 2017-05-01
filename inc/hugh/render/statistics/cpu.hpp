@@ -2,7 +2,7 @@
 
 /**************************************************************************************************/
 /*                                                                                                */
-/* Copyright (C) 2016 University of Hull                                                          */
+/* Copyright (C) 2016-2017 University of Hull                                                     */
 /*                                                                                                */
 /**************************************************************************************************/
 /*                                                                                                */
@@ -54,8 +54,6 @@ namespace hugh {
         virtual ~cpu();
 
         virtual std::unique_ptr<base::data> fetch() const;
-        
-        virtual void print_on(std::ostream&) const;
 
       protected:
 

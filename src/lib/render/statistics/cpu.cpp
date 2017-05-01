@@ -2,7 +2,7 @@
 
 /**************************************************************************************************/
 /*                                                                                                */
-/* Copyright (C) 2016 University of Hull                                                          */
+/* Copyright (C) 2016-2017 University of Hull                                                     */
 /*                                                                                                */
 /**************************************************************************************************/
 /*                                                                                                */
@@ -18,7 +18,7 @@
 
 // includes, system
 
-//#include <>
+#include <iomanip> // std::setprecision
 
 // includes, project
 
@@ -61,7 +61,11 @@ namespace hugh {
       {
         TRACE_NEVER("hugh::render::statistics::cpu::data::print_on");
 
-        os << "[" << rate_in_hz << "Hz," << time_in_ns << "ns]";
+        os << "["
+           << std::fixed << std::setprecision(2)
+           << rate_in_hz << "Hz,"
+           << time_in_ns << "ns"
+           << ']';
       }
 
       /* explicit */
@@ -99,14 +103,6 @@ namespace hugh {
         result->time_in_ns = double(duration_cast<nanoseconds>(stamp_).count());
         
         return std::unique_ptr<base::data>(result);
-      }
-
-      /* virtual */ void
-      cpu::print_on(std::ostream& os) const
-      {
-        TRACE_NEVER("hugh::render::statistics::cpu::print_on");
-
-        base::print_on(os);
       }
 
       /* virtual */ void

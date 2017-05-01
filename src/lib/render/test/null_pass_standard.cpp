@@ -2,11 +2,11 @@
 
 /**************************************************************************************************/
 /*                                                                                                */
-/* Copyright (C) 2016 University of Hull                                                          */
+/* Copyright (C) 2016-2017 University of Hull                                                     */
 /*                                                                                                */
 /**************************************************************************************************/
 /*                                                                                                */
-/*  module     :  hugh/render/test/pass_null.cpp                                                  */
+/*  module     :  hugh/render/test/null_pass_standard.cpp                                         */
 /*  project    :                                                                                  */
 /*  description:                                                                                  */
 /*                                                                                                */
@@ -19,9 +19,7 @@
 
 // includes, project
 
-#include <hugh/render/context/device.hpp>
-#include <hugh/render/context/swap.hpp>
-#include <hugh/render/pass/null.hpp>
+#include <hugh/render/null/pass/standard.hpp>
 
 #define HUGH_USE_TRACE
 #undef HUGH_USE_TRACE
@@ -33,18 +31,6 @@ namespace {
   
   // types, internal (class, enum, struct, union, typedef)
 
-  class ds_context : public hugh::render::context::device,
-                     public hugh::render::context::swap {
-
-  public:
-
-    explicit ds_context(glm::uvec2 const& a = glm::uvec2(1,1))
-      : hugh::render::context::device(),
-        hugh::render::context::swap  (a)
-    {}
-    
-  };
-
   // variables, internal
   
   // functions, internal
@@ -54,25 +40,35 @@ namespace {
 #define BOOST_TEST_MAIN
 #include <boost/test/unit_test.hpp>
 
-BOOST_AUTO_TEST_CASE(test_hugh_render_pass_null_ctor)
+BOOST_AUTO_TEST_CASE(test_hugh_render_null_pass_standard_ctor)
 {
-  using namespace hugh::render;
+  TRACE("test_hugh_render_null_pass_standard_ctor");
+  
+  using namespace hugh::render::null;
 
-  ds_context                  c;
-  std::unique_ptr<pass::null> pn(new pass::null(c));
+  context                         c;
+  std::unique_ptr<pass::standard> pn(new pass::standard(c));
   
   BOOST_CHECK(nullptr != pn);
 }
 
-BOOST_AUTO_TEST_CASE(test_hugh_render_pass_null_print_on)
+BOOST_AUTO_TEST_CASE(test_hugh_render_null_pass_standard_print_on)
 {
-  using namespace hugh::render;
+  TRACE("test_hugh_render_null_pass_standard_print_on");
+  
+  using namespace hugh::render::null;
 
-  ds_context                  c;
-  std::unique_ptr<pass::null> pn(new pass::null(c));
+  context                         c;
+  std::unique_ptr<pass::standard> pn(new pass::standard(c));
   
   BOOST_CHECK(nullptr != pn);
 
+  for (unsigned i(0); i < 5; ++i) {
+    pn->invalidate();
+    pn->resize    (*c.size);
+    pn->execute   (c);
+  }
+  
   std::ostringstream ostr;
 
   ostr << *pn;
@@ -81,12 +77,14 @@ BOOST_AUTO_TEST_CASE(test_hugh_render_pass_null_print_on)
   BOOST_TEST_MESSAGE( ostr.str());
 }
 
-BOOST_AUTO_TEST_CASE(test_hugh_render_pass_null_active)
+BOOST_AUTO_TEST_CASE(test_hugh_render_null_pass_standard_active)
 {
-  using namespace hugh::render;
+  TRACE("test_hugh_render_null_pass_standard_active");
+  
+  using namespace hugh::render::null;
 
-  ds_context                  c;
-  std::unique_ptr<pass::null> pn(new pass::null(c));
+  context                         c;
+  std::unique_ptr<pass::standard> pn(new pass::standard(c));
   
   BOOST_CHECK(nullptr != pn);
 
@@ -95,12 +93,14 @@ BOOST_AUTO_TEST_CASE(test_hugh_render_pass_null_active)
   BOOST_CHECK(false == pn->active());
 }
 
-BOOST_AUTO_TEST_CASE(test_hugh_render_pass_null_execute)
+BOOST_AUTO_TEST_CASE(test_hugh_render_null_pass_standard_execute)
 {
-  using namespace hugh::render;
+  TRACE("test_hugh_render_null_pass_standard_execute");
+  
+  using namespace hugh::render::null;
 
-  ds_context c;
-  std::unique_ptr<pass::null> pn(new pass::null(c));
+  context                         c;
+  std::unique_ptr<pass::standard> pn(new pass::standard(c));
   
   BOOST_CHECK(nullptr != pn);
 

@@ -2,15 +2,19 @@
 
 /**************************************************************************************************/
 /*                                                                                                */
-/* Copyright (C) 2016 University of Hull                                                          */
+/* Copyright (C) 2017 University of Hull                                                          */
 /*                                                                                                */
 /**************************************************************************************************/
 /*                                                                                                */
-/*  module     :  hugh/render/test/compile.cpp                                                    */
+/*  module     :  hugh/render/null/stage/swap.cpp                                                 */
 /*  project    :                                                                                  */
 /*  description:                                                                                  */
 /*                                                                                                */
 /**************************************************************************************************/
+
+// include i/f header
+
+#include "hugh/render/null/stage/swap.hpp"
 
 // includes, system
 
@@ -18,11 +22,7 @@
 
 // includes, project
 
-#include <hugh/render/context.hpp>
-#include <hugh/render/passes.hpp>
-#include <hugh/render/stages.hpp>
-#include <hugh/render/statistics.hpp>
-#include <hugh/render/windows.hpp>
+//#include <>
 
 #define HUGH_USE_TRACE
 #undef HUGH_USE_TRACE
@@ -40,10 +40,41 @@ namespace {
 
 } // namespace {
 
-#define BOOST_TEST_MAIN
-#include <boost/test/unit_test.hpp>
+namespace hugh {
 
-BOOST_AUTO_TEST_CASE(test_hugh_render_compile)
-{
-  BOOST_CHECK(true);
-}
+  namespace render {
+
+    namespace null {
+      
+    namespace stage {
+      
+      // variables, exported
+  
+      // functions, exported
+
+      /* explicit */
+      swap::swap(context& a)
+        : base(a)
+      {
+        TRACE("hugh::render::null::stage::swap::swap");
+      }
+
+      /* virtual */
+      swap::~swap()
+      {
+        TRACE("hugh::render::null::stage::swap::~swap");
+      }      
+      
+      /* virtual */ void
+      swap::do_execute(context::swap&)
+      {
+        TRACE("hugh::render::null::stage::swap::do_execute");
+      }
+      
+    } // namespace stage {
+
+    } // namespace null {
+    
+  } // namespace render {
+  
+} // namespace hugh {

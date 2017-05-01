@@ -2,19 +2,19 @@
 
 /**************************************************************************************************/
 /*                                                                                                */
-/* Copyright (C) 2016 University of Hull                                                          */
+/* Copyright (C) 2017 University of Hull                                                          */
 /*                                                                                                */
 /**************************************************************************************************/
 /*                                                                                                */
-/*  module     :  hugh/render/pass/null.hpp                                                       */
+/*  module     :  hugh/render/null/stage/swap.hpp                                                 */
 /*  project    :                                                                                  */
 /*  description:                                                                                  */
 /*                                                                                                */
 /**************************************************************************************************/
 
-#if !defined(HUGH_RENDER_PASS_NULL_HPP)
+#if !defined(HUGH_RENDER_NULL_STAGE_SWAP_HPP)
 
-#define HUGH_RENDER_PASS_NULL_HPP
+#define HUGH_RENDER_NULL_STAGE_SWAP_HPP
 
 // includes, system
 
@@ -22,41 +22,44 @@
 
 // includes, project
 
-#include <hugh/render/pass/base.hpp>
+#include <hugh/render/null/context.hpp>
+#include <hugh/render/stage/base.hpp>
 
 namespace hugh {
 
   namespace render {
 
-    namespace pass {
+    namespace null {
       
-      // types, exported (class, enum, struct, union, typedef)
+      namespace stage {
+      
+        // types, exported (class, enum, struct, union, typedef)
 
-      class HUGH_RENDER_EXPORT null : public base {
+        class HUGH_RENDER_EXPORT swap final : public render::stage::base {
 
-      public:
+        public:
 
-        explicit null(context::device&);
-        virtual ~null();
-
-      protected:
+          explicit swap(context&);
+          virtual ~swap();
         
-        virtual void do_execute   (context::swap&);
-        virtual void do_invalidate();
-        virtual void do_resize    (glm::uvec2 const& /* size */);
+        protected:
 
-      };
-    
-      // variables, exported (extern)
+          virtual void do_execute(context::swap&);
+        
+        };
+      
+        // variables, exported (extern)
 
-      // functions, inlined (inline)
+        // functions, inlined (inline)
   
-      // functions, exported (extern)
+        // functions, exported (extern)
 
-    } // namespace pass {
-        
+      } // namespace stage {
+
+    } // namespace null {
+    
   } // namespace render {
   
 } // namespace hugh {
 
-#endif // #if !defined(HUGH_RENDER_PASS_NULL_HPP)
+#endif // #if !defined(HUGH_RENDER_NULL_STAGE_SWAP_HPP)
