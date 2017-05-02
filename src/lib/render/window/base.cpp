@@ -126,7 +126,12 @@ namespace hugh {
         
         using support::ostream::operator<<;
 
-        os << '[' << *(dev_ctx_.get()) << ',' << *(swp_ctx_.get()) << ',' << render_passes_ << ']';
+        os << '['
+           << *(dev_ctx_.get()) << ','
+           << *(swp_ctx_.get()) << ','
+           << '\n'
+           << render_passes_
+           << ']';
       }
 
       /* explicit */

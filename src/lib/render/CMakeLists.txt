@@ -27,6 +27,7 @@ list(APPEND SRC null/pass/standard.cpp)
 list(APPEND SRC null/stage/clear.cpp)
 list(APPEND SRC null/stage/draw.cpp)
 list(APPEND SRC null/stage/swap.cpp)
+list(APPEND SRC null/window.cpp)
 
 list(APPEND SRC pass/base.cpp)
 list(APPEND SRC pass/container.cpp)
