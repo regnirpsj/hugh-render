@@ -6,15 +6,15 @@
 /*                                                                                                */
 /**************************************************************************************************/
 /*                                                                                                */
-/*  module     :  hugh/render/null/stage/clear.hpp                                                */
+/*  module     :  hugh/render/null/action/draw.cpp                                                */
 /*  project    :                                                                                  */
 /*  description:                                                                                  */
 /*                                                                                                */
 /**************************************************************************************************/
 
-#if !defined(HUGH_RENDER_NULL_STAGE_CLEAR_HPP)
+// include i/f header
 
-#define HUGH_RENDER_NULL_STAGE_CLEAR_HPP
+#include "hugh/render/null/action/draw.hpp"
 
 // includes, system
 
@@ -22,8 +22,23 @@
 
 // includes, project
 
-#include <hugh/render/null/context.hpp>
-#include <hugh/render/stage/base.hpp>
+//#include <>
+
+#define HUGH_USE_TRACE
+#undef HUGH_USE_TRACE
+#include <hugh/support/trace.hpp>
+
+// internal unnamed namespace
+
+namespace {
+  
+  // types, internal (class, enum, struct, union, typedef)
+
+  // variables, internal
+  
+  // functions, internal
+
+} // namespace {
 
 namespace hugh {
 
@@ -31,35 +46,35 @@ namespace hugh {
 
     namespace null {
       
-      namespace stage {
+    namespace action {
       
-        // types, exported (class, enum, struct, union, typedef)
-
-        class HUGH_RENDER_EXPORT clear final : public render::stage::base {
-
-        public:
-
-          explicit clear(context&);
-          virtual ~clear();
-        
-        protected:
-
-          virtual void do_execute(context::swap&);
-        
-        };
-      
-        // variables, exported (extern)
-
-        // functions, inlined (inline)
+      // variables, exported
   
-        // functions, exported (extern)
+      // functions, exported
 
-      } // namespace stage {
+      /* explicit */
+      draw::draw(context& a)
+        : base(a)
+      {
+        TRACE("hugh::render::null::action::draw::draw");
+      }
+
+      /* virtual */
+      draw::~draw()
+      {
+        TRACE("hugh::render::null::action::draw::~draw");
+      }      
+      
+      /* virtual */ void
+      draw::do_execute(context::swap&)
+      {
+        TRACE("hugh::render::null::action::draw::do_execute");
+      }
+      
+    } // namespace action {
 
     } // namespace null {
     
   } // namespace render {
   
 } // namespace hugh {
-
-#endif // #if !defined(HUGH_RENDER_NULL_STAGE_CLEAR_HPP)

@@ -6,23 +6,20 @@
 /*                                                                                                */
 /**************************************************************************************************/
 /*                                                                                                */
-/*  module     :  hugh/render/null/stage/draw.cpp                                                 */
+/*  module     :  hugh/render/test/null_action_draw.cpp                                           */
 /*  project    :                                                                                  */
 /*  description:                                                                                  */
 /*                                                                                                */
 /**************************************************************************************************/
 
-// include i/f header
-
-#include "hugh/render/null/stage/draw.hpp"
-
 // includes, system
 
-//#include <>
+#include <memory>  // std::unique_ptr<>
+#include <sstream> // std::ostringstream
 
 // includes, project
 
-//#include <>
+#include <hugh/render/null/action/draw.hpp>
 
 #define HUGH_USE_TRACE
 #undef HUGH_USE_TRACE
@@ -40,41 +37,15 @@ namespace {
 
 } // namespace {
 
-namespace hugh {
+#define BOOST_TEST_MAIN
+#include <boost/test/unit_test.hpp>
 
-  namespace render {
+BOOST_AUTO_TEST_CASE(test_hugh_render_null_action_draw_ctor)
+{
+  using namespace hugh::render::null;
 
-    namespace null {
-      
-    namespace stage {
-      
-      // variables, exported
+  context                             c;
+  std::unique_ptr<action::draw> const a(new action::draw(c));
   
-      // functions, exported
-
-      /* explicit */
-      draw::draw(context& a)
-        : base(a)
-      {
-        TRACE("hugh::render::null::stage::draw::draw");
-      }
-
-      /* virtual */
-      draw::~draw()
-      {
-        TRACE("hugh::render::null::stage::draw::~draw");
-      }      
-      
-      /* virtual */ void
-      draw::do_execute(context::swap&)
-      {
-        TRACE("hugh::render::null::stage::draw::do_execute");
-      }
-      
-    } // namespace stage {
-
-    } // namespace null {
-    
-  } // namespace render {
-  
-} // namespace hugh {
+  BOOST_CHECK(nullptr != a);
+}

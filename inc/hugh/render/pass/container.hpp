@@ -2,11 +2,11 @@
 
 /**************************************************************************************************/
 /*                                                                                                */
-/* Copyright (C) 2016 University of Hull                                                          */
+/* Copyright (C) 2016-2017 University of Hull                                                     */
 /*                                                                                                */
 /**************************************************************************************************/
 /*                                                                                                */
-/*  module     :  hugh/render/pass/container.hpp                                                       */
+/*  module     :  hugh/render/pass/container.hpp                                                  */
 /*  project    :                                                                                  */
 /*  description:                                                                                  */
 /*                                                                                                */
@@ -40,16 +40,16 @@ namespace hugh {
         explicit container(context::device&);
         virtual ~container();
 
-        bool add(stage::base*);
-        bool sub(stage::base*);
+        bool add(action::base*);
+        bool sub(action::base*);
         
         virtual void print_on(std::ostream&) const;
 
       protected:
 
-        using render_stage_list_type = std::vector<boost::intrusive_ptr<stage::base>>;
+        using render_action_list_type = std::vector<boost::intrusive_ptr<action::base>>;
 
-        render_stage_list_type stages_;
+        render_action_list_type actions_;
         
         virtual void do_execute   (context::swap&);
         virtual void do_invalidate();

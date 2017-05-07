@@ -6,7 +6,7 @@
 /*                                                                                                */
 /**************************************************************************************************/
 /*                                                                                                */
-/*  module     :  hugh/render/null/stage/clear.cpp                                                */
+/*  module     :  hugh/render/null/state/raster.cpp                                               */
 /*  project    :                                                                                  */
 /*  description:                                                                                  */
 /*                                                                                                */
@@ -14,7 +14,7 @@
 
 // include i/f header
 
-#include "hugh/render/null/stage/clear.hpp"
+#include "hugh/render/null/state/raster.hpp"
 
 // includes, system
 
@@ -46,35 +46,35 @@ namespace hugh {
 
     namespace null {
       
-    namespace stage {
-      
-      // variables, exported
+      namespace state {
+        
+        // variables, exported
   
-      // functions, exported
+        // functions, exported
 
-      /* explicit */
-      clear::clear(context& a)
-        : base(a)
-      {
-        TRACE("hugh::render::null::stage::clear::clear");
-      }
-
-      /* virtual */
-      clear::~clear()
-      {
-        TRACE("hugh::render::null::stage::clear::~clear");
-      }      
-      
-      /* virtual */ void
-      clear::do_execute(context::swap&)
-      {
-        TRACE("hugh::render::null::stage::clear::do_execute");
-      }
-      
-    } // namespace stage {
+        /* explicit */
+        raster::raster(context& a)
+          : render::state::base(a)
+        {
+          TRACE("hugh::render::null:state::raster::raster");
+        }
+        
+        /* virtual */
+        raster::~raster()
+        {
+          TRACE("hugh::render::null:state::raster::~raster");
+        }
+          
+        /* virtual */ void
+        raster::do_apply()
+        {
+          TRACE("hugh::render::null:state::raster::do_apply");
+        }
+        
+      } // namespace state {
 
     } // namespace null {
-    
+
   } // namespace render {
   
 } // namespace hugh {

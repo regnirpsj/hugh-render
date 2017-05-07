@@ -58,7 +58,7 @@ namespace hugh {
       
       /* explicit */
       base::base(context::device& a)
-        : stage::base(a)
+        : action::base(a)
       {
         TRACE("hugh::render::pass::base::base");
       }

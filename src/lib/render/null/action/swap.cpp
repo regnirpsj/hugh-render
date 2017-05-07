@@ -6,7 +6,7 @@
 /*                                                                                                */
 /**************************************************************************************************/
 /*                                                                                                */
-/*  module     :  hugh/render/null/stage/swap.cpp                                                 */
+/*  module     :  hugh/render/null/action/swap.cpp                                                */
 /*  project    :                                                                                  */
 /*  description:                                                                                  */
 /*                                                                                                */
@@ -14,7 +14,7 @@
 
 // include i/f header
 
-#include "hugh/render/null/stage/swap.hpp"
+#include "hugh/render/null/action/swap.hpp"
 
 // includes, system
 
@@ -46,7 +46,7 @@ namespace hugh {
 
     namespace null {
       
-    namespace stage {
+    namespace action {
       
       // variables, exported
   
@@ -56,22 +56,22 @@ namespace hugh {
       swap::swap(context& a)
         : base(a)
       {
-        TRACE("hugh::render::null::stage::swap::swap");
+        TRACE("hugh::render::null::action::swap::swap");
       }
 
       /* virtual */
       swap::~swap()
       {
-        TRACE("hugh::render::null::stage::swap::~swap");
+        TRACE("hugh::render::null::action::swap::~swap");
       }      
       
       /* virtual */ void
       swap::do_execute(context::swap&)
       {
-        TRACE("hugh::render::null::stage::swap::do_execute");
+        TRACE("hugh::render::null::action::swap::do_execute");
       }
       
-    } // namespace stage {
+    } // namespace action {
 
     } // namespace null {
     

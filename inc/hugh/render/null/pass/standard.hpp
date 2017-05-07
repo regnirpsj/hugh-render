@@ -23,9 +23,9 @@
 // includes, project
 
 #include <hugh/render/null/context.hpp>
-#include <hugh/render/null/stage/clear.hpp>
-#include <hugh/render/null/stage/draw.hpp>
-#include <hugh/render/null/stage/swap.hpp>
+#include <hugh/render/null/action/clear.hpp>
+#include <hugh/render/null/action/draw.hpp>
+#include <hugh/render/null/action/swap.hpp>
 #include <hugh/render/pass/base.hpp>
 
 namespace hugh {
@@ -55,9 +55,9 @@ namespace hugh {
 
         private:
 
-          stage::clear clear_;
-          stage::draw  draw_;
-          stage::swap  swap_;
+          action::clear clear_;
+          action::draw  draw_;
+          action::swap  swap_;
           
         };
     

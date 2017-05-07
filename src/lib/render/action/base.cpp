@@ -2,11 +2,11 @@
 
 /**************************************************************************************************/
 /*                                                                                                */
-/* Copyright (C) 2016 University of Hull                                                          */
+/* Copyright (C) 2016-2017 University of Hull                                                     */
 /*                                                                                                */
 /**************************************************************************************************/
 /*                                                                                                */
-/*  module     :  hugh/render/stage/base.cpp                                                      */
+/*  module     :  hugh/render/action/base.cpp                                                     */
 /*  project    :                                                                                  */
 /*  description:                                                                                  */
 /*                                                                                                */
@@ -14,7 +14,7 @@
 
 // include i/f header
 
-#include "hugh/render/stage/base.hpp"
+#include "hugh/render/action/base.hpp"
 
 // includes, system
 
@@ -44,7 +44,7 @@ namespace hugh {
 
   namespace render {
 
-    namespace stage {
+    namespace action {
       
       // variables, exported
   
@@ -53,13 +53,13 @@ namespace hugh {
       /* virtual */
       base::~base()
       {
-        TRACE("hugh::render::stage::base::~base");
+        TRACE("hugh::render::action::base::~base");
       }
       
       void
       base::execute(context::swap& a)
       {
-        TRACE("hugh::render::stage::base::execute");
+        TRACE("hugh::render::action::base::execute");
 
         statistics::guard const sg(*stats_cpu_[stats::execute]);
 
@@ -71,7 +71,7 @@ namespace hugh {
       /* virtual */ void
       base::invalidate()
       {
-        TRACE("hugh::render::stage::base::invalidate");
+        TRACE("hugh::render::action::base::invalidate");
 
         statistics::guard const sg(*stats_cpu_[stats::invalidate]);
 
@@ -81,7 +81,7 @@ namespace hugh {
       /* virtual */ void
       base::resize(glm::uvec2 const& a)
       {
-        TRACE("hugh::render::stage::base::resize");
+        TRACE("hugh::render::action::base::resize");
 
         statistics::guard const sg(*stats_cpu_[stats::resize]);
 
@@ -91,7 +91,7 @@ namespace hugh {
       bool const&
       base::active() const
       {
-        TRACE("hugh::render::stage::base::active(get)");
+        TRACE("hugh::render::action::base::active(get)");
 
         return active_;
       }
@@ -99,7 +99,7 @@ namespace hugh {
       bool
       base::active(bool a)
       {
-        TRACE("hugh::render::stage::base::active(set)");
+        TRACE("hugh::render::action::base::active(set)");
 
         bool const result(active_);
 
@@ -111,7 +111,7 @@ namespace hugh {
       /* virtual */ void
       base::print_on(std::ostream& os) const
       {
-        TRACE_NEVER("hugh::render::stage::base::print_on");
+        TRACE_NEVER("hugh::render::action::base::print_on");
 
         os << '['
            << ctx_                                                    << ','
@@ -130,7 +130,7 @@ namespace hugh {
           active_                  (true),
           stats_cpu_               ()
       {
-        TRACE("hugh::render::stage::base::base");
+        TRACE("hugh::render::action::base::base");
 
         stats_cpu_[stats::execute]   .reset(new statistics::cpu);
         stats_cpu_[stats::invalidate].reset(new statistics::cpu);
@@ -140,26 +140,26 @@ namespace hugh {
       /* virtual */ void
       base::do_execute(context::swap&)
       {
-        TRACE("hugh::render::stage::base::do_execute");
+        TRACE("hugh::render::action::base::do_execute");
 
         throw std::logic_error("pure virtual function "
-                               "'hugh::render::stage::base::do_execute'"
+                               "'hugh::render::action::base::do_execute'"
                                " called");
       }
       
       /* virtual */ void
       base::do_invalidate()
       {
-        TRACE("hugh::render::stage::base::do_invalidate");
+        TRACE("hugh::render::action::base::do_invalidate");
       }
 
       /* virtual */ void
       base::do_resize(glm::uvec2 const&)
       {
-        TRACE("hugh::render::stage::base::do_resize");
+        TRACE("hugh::render::action::base::do_resize");
       }
 
-    } // namespace stage {
+    } // namespace action {
 
   } // namespace render {
   

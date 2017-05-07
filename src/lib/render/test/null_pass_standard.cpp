@@ -47,9 +47,9 @@ BOOST_AUTO_TEST_CASE(test_hugh_render_null_pass_standard_ctor)
   using namespace hugh::render::null;
 
   context                         c;
-  std::unique_ptr<pass::standard> pn(new pass::standard(c));
+  std::unique_ptr<pass::standard> p(new pass::standard(c));
   
-  BOOST_CHECK(nullptr != pn);
+  BOOST_CHECK(nullptr != p);
 }
 
 BOOST_AUTO_TEST_CASE(test_hugh_render_null_pass_standard_print_on)
@@ -59,19 +59,19 @@ BOOST_AUTO_TEST_CASE(test_hugh_render_null_pass_standard_print_on)
   using namespace hugh::render::null;
 
   context                         c;
-  std::unique_ptr<pass::standard> pn(new pass::standard(c));
+  std::unique_ptr<pass::standard> p(new pass::standard(c));
   
-  BOOST_CHECK(nullptr != pn);
+  BOOST_CHECK(nullptr != p);
 
   for (unsigned i(0); i < 5; ++i) {
-    pn->invalidate();
-    pn->resize    (*c.size);
-    pn->execute   (c);
+    p->invalidate();
+    p->resize    (*c.size);
+    p->execute   (c);
   }
   
   std::ostringstream ostr;
 
-  ostr << *pn;
+  ostr << *p;
 
   BOOST_CHECK       (!ostr.str().empty());
   BOOST_TEST_MESSAGE( ostr.str());
@@ -84,13 +84,13 @@ BOOST_AUTO_TEST_CASE(test_hugh_render_null_pass_standard_active)
   using namespace hugh::render::null;
 
   context                         c;
-  std::unique_ptr<pass::standard> pn(new pass::standard(c));
+  std::unique_ptr<pass::standard> p(new pass::standard(c));
   
-  BOOST_CHECK(nullptr != pn);
+  BOOST_CHECK(nullptr != p);
 
-  BOOST_CHECK( true == pn->active());
-  BOOST_CHECK( true == pn->active(false));
-  BOOST_CHECK(false == pn->active());
+  BOOST_CHECK( true == p->active());
+  BOOST_CHECK( true == p->active(false));
+  BOOST_CHECK(false == p->active());
 }
 
 BOOST_AUTO_TEST_CASE(test_hugh_render_null_pass_standard_execute)
@@ -100,11 +100,11 @@ BOOST_AUTO_TEST_CASE(test_hugh_render_null_pass_standard_execute)
   using namespace hugh::render::null;
 
   context                         c;
-  std::unique_ptr<pass::standard> pn(new pass::standard(c));
+  std::unique_ptr<pass::standard> p(new pass::standard(c));
   
-  BOOST_CHECK(nullptr != pn);
+  BOOST_CHECK(nullptr != p);
 
-  pn->invalidate();
-  pn->resize    (*c.size);
-  pn->execute   (c);
+  p->invalidate();
+  p->resize    (*c.size);
+  p->execute   (c);
 }

@@ -2,19 +2,19 @@
 
 /**************************************************************************************************/
 /*                                                                                                */
-/* Copyright (C) 2016 University of Hull                                                          */
+/* Copyright (C) 2017 University of Hull                                                          */
 /*                                                                                                */
 /**************************************************************************************************/
 /*                                                                                                */
-/*  module     :  hugh/render/pass/base.hpp                                                       */
+/*  module     :  hugh/render/null/action/draw.hpp                                                */
 /*  project    :                                                                                  */
 /*  description:                                                                                  */
 /*                                                                                                */
 /**************************************************************************************************/
 
-#if !defined(HUGH_RENDER_PASS_BASE_HPP)
+#if !defined(HUGH_RENDER_NULL_ACTION_DRAW_HPP)
 
-#define HUGH_RENDER_PASS_BASE_HPP
+#define HUGH_RENDER_NULL_ACTION_DRAW_HPP
 
 // includes, system
 
@@ -22,39 +22,44 @@
 
 // includes, project
 
+#include <hugh/render/null/context.hpp>
 #include <hugh/render/action/base.hpp>
 
 namespace hugh {
 
   namespace render {
 
-    namespace pass {
+    namespace null {
       
-      // types, exported (class, enum, struct, union, typedef)
-
-      class HUGH_RENDER_EXPORT base : public action::base {
-
-      public:
+      namespace action {
       
-        virtual ~base() =0;
+        // types, exported (class, enum, struct, union, typedef)
 
-      protected:
+        class HUGH_RENDER_EXPORT draw final : public render::action::base {
+
+        public:
+
+          explicit draw(context&);
+          virtual ~draw();
         
-        explicit base(context::device&);
+        protected:
 
-      };
-    
-      // variables, exported (extern)
+          virtual void do_execute(context::swap&);
+        
+        };
+      
+        // variables, exported (extern)
 
-      // functions, inlined (inline)
+        // functions, inlined (inline)
   
-      // functions, exported (extern)
+        // functions, exported (extern)
 
-    } // namespace pass {
-        
+      } // namespace action {
+
+    } // namespace null {
+    
   } // namespace render {
   
 } // namespace hugh {
 
-#endif // #if !defined(HUGH_RENDER_PASS_BASE_HPP)
-
+#endif // #if !defined(HUGH_RENDER_NULL_ACTION_DRAW_HPP)

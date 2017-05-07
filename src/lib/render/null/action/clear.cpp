@@ -6,20 +6,23 @@
 /*                                                                                                */
 /**************************************************************************************************/
 /*                                                                                                */
-/*  module     :  hugh/render/test/null_stage_clear.cpp                                           */
+/*  module     :  hugh/render/null/action/clear.cpp                                               */
 /*  project    :                                                                                  */
 /*  description:                                                                                  */
 /*                                                                                                */
 /**************************************************************************************************/
 
+// include i/f header
+
+#include "hugh/render/null/action/clear.hpp"
+
 // includes, system
 
-#include <memory>  // std::unique_ptr<>
-#include <sstream> // std::ostringstream
+//#include <>
 
 // includes, project
 
-#include <hugh/render/null/stage/clear.hpp>
+//#include <>
 
 #define HUGH_USE_TRACE
 #undef HUGH_USE_TRACE
@@ -37,15 +40,41 @@ namespace {
 
 } // namespace {
 
-#define BOOST_TEST_MAIN
-#include <boost/test/unit_test.hpp>
+namespace hugh {
 
-BOOST_AUTO_TEST_CASE(test_hugh_render_null_stage_clear_ctor)
-{
-  using namespace hugh::render::null;
+  namespace render {
 
-  context                             c;
-  std::unique_ptr<stage::clear> const s(new stage::clear(c));
+    namespace null {
+      
+    namespace action {
+      
+      // variables, exported
   
-  BOOST_CHECK(nullptr != s);
-}
+      // functions, exported
+
+      /* explicit */
+      clear::clear(context& a)
+        : base(a)
+      {
+        TRACE("hugh::render::null::action::clear::clear");
+      }
+
+      /* virtual */
+      clear::~clear()
+      {
+        TRACE("hugh::render::null::action::clear::~clear");
+      }      
+      
+      /* virtual */ void
+      clear::do_execute(context::swap&)
+      {
+        TRACE("hugh::render::null::action::clear::do_execute");
+      }
+      
+    } // namespace action {
+
+    } // namespace null {
+    
+  } // namespace render {
+  
+} // namespace hugh {

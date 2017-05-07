@@ -13,11 +13,12 @@ find_package(Boost ${BOOST_MINIMUM_VERSION} REQUIRED COMPONENTS unit_test_framew
 include_directories(SYSTEM ${Boost_INLCUDE_DIR})
 
 set(SRC)
+list(APPEND SRC null_action_clear.cpp)
+list(APPEND SRC null_action_draw.cpp)
+list(APPEND SRC null_action_swap.cpp)
 list(APPEND SRC null_context.cpp)
 list(APPEND SRC null_pass_standard.cpp)
-list(APPEND SRC null_stage_clear.cpp)
-list(APPEND SRC null_stage_draw.cpp)
-list(APPEND SRC null_stage_swap.cpp)
+list(APPEND SRC null_state_raster.cpp)
 list(APPEND SRC null_window.cpp)
 list(APPEND SRC statistics_cpu.cpp)
 

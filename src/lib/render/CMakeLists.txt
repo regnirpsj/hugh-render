@@ -18,21 +18,24 @@ include_directories(SYSTEM ${HUGH_INCLUDE_DIRS})
 
 set(SRC)
 
+list(APPEND SRC action/base.cpp)
+
 list(APPEND SRC context/base.cpp)
 list(APPEND SRC context/device.cpp)
 list(APPEND SRC context/swap.cpp)
 
+list(APPEND SRC null/action/clear.cpp)
+list(APPEND SRC null/action/draw.cpp)
+list(APPEND SRC null/action/swap.cpp)
 list(APPEND SRC null/context.cpp)
 list(APPEND SRC null/pass/standard.cpp)
-list(APPEND SRC null/stage/clear.cpp)
-list(APPEND SRC null/stage/draw.cpp)
-list(APPEND SRC null/stage/swap.cpp)
+list(APPEND SRC null/state/raster.cpp)
 list(APPEND SRC null/window.cpp)
 
 list(APPEND SRC pass/base.cpp)
 list(APPEND SRC pass/container.cpp)
 
-list(APPEND SRC stage/base.cpp)
+list(APPEND SRC state/base.cpp)
 
 list(APPEND SRC statistics/base.cpp)
 list(APPEND SRC statistics/cpu.cpp)

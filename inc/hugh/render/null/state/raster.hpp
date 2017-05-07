@@ -6,15 +6,15 @@
 /*                                                                                                */
 /**************************************************************************************************/
 /*                                                                                                */
-/*  module     :  hugh/render/null/stage/draw.hpp                                                 */
+/*  module     :  hugh/render/null/state/raster.hpp                                               */
 /*  project    :                                                                                  */
 /*  description:                                                                                  */
 /*                                                                                                */
 /**************************************************************************************************/
 
-#if !defined(HUGH_RENDER_NULL_STAGE_DRAW_HPP)
+#if !defined(HUGH_RENDER_NULL_STATE_RASTER_HPP)
 
-#define HUGH_RENDER_NULL_STAGE_DRAW_HPP
+#define HUGH_RENDER_NULL_STATE_RASTER_HPP
 
 // includes, system
 
@@ -23,7 +23,7 @@
 // includes, project
 
 #include <hugh/render/null/context.hpp>
-#include <hugh/render/stage/base.hpp>
+#include <hugh/render/state/base.hpp>
 
 namespace hugh {
 
@@ -31,35 +31,35 @@ namespace hugh {
 
     namespace null {
       
-      namespace stage {
+      namespace state {
       
         // types, exported (class, enum, struct, union, typedef)
 
-        class HUGH_RENDER_EXPORT draw final : public render::stage::base {
-
+        class HUGH_RENDER_EXPORT raster final : public render::state::base {
+          
         public:
 
-          explicit draw(context&);
-          virtual ~draw();
-        
+          explicit raster(context&);
+          virtual ~raster();
+          
         protected:
-
-          virtual void do_execute(context::swap&);
-        
+          
+          virtual void do_apply();
+          
         };
-      
+        
         // variables, exported (extern)
 
         // functions, inlined (inline)
   
         // functions, exported (extern)
 
-      } // namespace stage {
+      } // namespace state {
 
     } // namespace null {
-    
+
   } // namespace render {
   
 } // namespace hugh {
 
-#endif // #if !defined(HUGH_RENDER_NULL_STAGE_DRAW_HPP)
+#endif // #if !defined(HUGH_RENDER_NULL_STATE_RASTER_HPP)

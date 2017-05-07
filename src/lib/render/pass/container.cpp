@@ -53,8 +53,8 @@ namespace hugh {
 
       /* explicit */
       container::container(context::device& a)
-        : base   (a),
-          stages_()
+        : base    (a),
+          actions_()
       {
         TRACE("hugh::render::pass::container::container");
       }
@@ -66,15 +66,15 @@ namespace hugh {
       }
 
       bool
-      container::add(stage::base* a)
+      container::add(action::base* a)
       {
         TRACE("hugh::render::pass::container::add");
         
         bool result(false);
-        auto found (std::find(stages_.begin(), stages_.end(), a));
+        auto found (std::find(actions_.begin(), actions_.end(), a));
 
-        if (stages_.end() == found) {
-          stages_.push_back(a);
+        if (actions_.end() == found) {
+          actions_.push_back(a);
 
           result = true;
         }
@@ -83,15 +83,15 @@ namespace hugh {
       }
       
       bool
-      container::sub(stage::base* a)
+      container::sub(action::base* a)
       {
         TRACE("hugh::render::pass::container::sub");
         
         bool result(false);
-        auto found (std::find(stages_.begin(), stages_.end(), a));
+        auto found (std::find(actions_.begin(), actions_.end(), a));
 
-        if (stages_.end() != found) {
-          stages_.erase(found);
+        if (actions_.end() != found) {
+          actions_.erase(found);
 
           result = true;
         }
@@ -109,7 +109,7 @@ namespace hugh {
         using support::ostream::remove;
         using support::ostream::operator<<;
 
-        os << remove(1) << ',' << stages_ << ']';
+        os << remove(1) << ',' << actions_ << ']';
       }
       
       /* virtual */ void
@@ -118,7 +118,7 @@ namespace hugh {
         TRACE("hugh::render::pass::container::do_execute");
 
         if (active_) {
-          for (auto& s : stages_) {
+          for (auto& s : actions_) {
             s->execute(a);
           }
         }
@@ -129,7 +129,7 @@ namespace hugh {
       {
         TRACE("hugh::render::pass::container::do_invalidate");
 
-        for (auto& s : stages_) {
+        for (auto& s : actions_) {
           s->invalidate();
         }
       }
@@ -139,7 +139,7 @@ namespace hugh {
       {
         TRACE("hugh::render::pass::container::do_resize");
 
-        for (auto& s : stages_) {
+        for (auto& s : actions_) {
           s->resize(a);
         }
       }

@@ -6,60 +6,46 @@
 /*                                                                                                */
 /**************************************************************************************************/
 /*                                                                                                */
-/*  module     :  hugh/render/null/stage/swap.hpp                                                 */
+/*  module     :  hugh/render/test/null_action_clear.cpp                                          */
 /*  project    :                                                                                  */
 /*  description:                                                                                  */
 /*                                                                                                */
 /**************************************************************************************************/
 
-#if !defined(HUGH_RENDER_NULL_STAGE_SWAP_HPP)
-
-#define HUGH_RENDER_NULL_STAGE_SWAP_HPP
-
 // includes, system
 
-//#include <>
+#include <memory>  // std::unique_ptr<>
+#include <sstream> // std::ostringstream
 
 // includes, project
 
-#include <hugh/render/null/context.hpp>
-#include <hugh/render/stage/base.hpp>
+#include <hugh/render/null/action/clear.hpp>
 
-namespace hugh {
+#define HUGH_USE_TRACE
+#undef HUGH_USE_TRACE
+#include <hugh/support/trace.hpp>
 
-  namespace render {
+// internal unnamed namespace
 
-    namespace null {
-      
-      namespace stage {
-      
-        // types, exported (class, enum, struct, union, typedef)
-
-        class HUGH_RENDER_EXPORT swap final : public render::stage::base {
-
-        public:
-
-          explicit swap(context&);
-          virtual ~swap();
-        
-        protected:
-
-          virtual void do_execute(context::swap&);
-        
-        };
-      
-        // variables, exported (extern)
-
-        // functions, inlined (inline)
+namespace {
   
-        // functions, exported (extern)
+  // types, internal (class, enum, struct, union, typedef)
 
-      } // namespace stage {
-
-    } // namespace null {
-    
-  } // namespace render {
+  // variables, internal
   
-} // namespace hugh {
+  // functions, internal
 
-#endif // #if !defined(HUGH_RENDER_NULL_STAGE_SWAP_HPP)
+} // namespace {
+
+#define BOOST_TEST_MAIN
+#include <boost/test/unit_test.hpp>
+
+BOOST_AUTO_TEST_CASE(test_hugh_render_null_action_clear_ctor)
+{
+  using namespace hugh::render::null;
+
+  context                              c;
+  std::unique_ptr<action::clear> const a(new action::clear(c));
+  
+  BOOST_CHECK(nullptr != a);
+}

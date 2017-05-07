@@ -6,15 +6,15 @@
 /*                                                                                                */
 /**************************************************************************************************/
 /*                                                                                                */
-/*  module     :  hugh/render/stage/base.hpp                                                      */
+/*  module     :  hugh/render/action/base.hpp                                                     */
 /*  project    :                                                                                  */
 /*  description:                                                                                  */
 /*                                                                                                */
 /**************************************************************************************************/
 
-#if !defined(HUGH_RENDER_STAGE_BASE_HPP)
+#if !defined(HUGH_RENDER_ACTION_BASE_HPP)
 
-#define HUGH_RENDER_STAGE_BASE_HPP
+#define HUGH_RENDER_ACTION_BASE_HPP
 
 // includes, system
 
@@ -31,7 +31,7 @@ namespace hugh {
 
   namespace render {
 
-    namespace stage {
+    namespace action {
       
       // types, exported (class, enum, struct, union, typedef)
 
@@ -78,10 +78,10 @@ namespace hugh {
   
       // functions, exported (extern)
 
-    } // namespace stage {
+    } // namespace action {
         
   } // namespace render {
   
 } // namespace hugh {
 
-#endif // #if !defined(HUGH_RENDER_STAGE_BASE_HPP)
+#endif // #if !defined(HUGH_RENDER_ACTION_BASE_HPP)
