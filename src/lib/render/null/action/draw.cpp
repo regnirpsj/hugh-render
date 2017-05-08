@@ -46,32 +46,32 @@ namespace hugh {
 
     namespace null {
       
-    namespace action {
+      namespace action {
       
-      // variables, exported
+        // variables, exported
   
-      // functions, exported
+        // functions, exported
 
-      /* explicit */
-      draw::draw(context& a)
-        : base(a)
-      {
-        TRACE("hugh::render::null::action::draw::draw");
-      }
+        /* explicit */
+        draw::draw(context& a)
+          : base(a)
+        {
+          TRACE("hugh::render::null::action::draw::draw");
+        }
 
-      /* virtual */
-      draw::~draw()
-      {
-        TRACE("hugh::render::null::action::draw::~draw");
-      }      
+        /* virtual */
+        draw::~draw()
+        {
+          TRACE("hugh::render::null::action::draw::~draw");
+        }      
       
-      /* virtual */ void
-      draw::do_execute(context::swap&)
-      {
-        TRACE("hugh::render::null::action::draw::do_execute");
-      }
+        /* virtual */ void
+        draw::do_execute(context::swap&)
+        {
+          TRACE("hugh::render::null::action::draw::do_execute");
+        }
       
-    } // namespace action {
+      } // namespace action {
 
     } // namespace null {
     

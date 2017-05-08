@@ -46,32 +46,32 @@ namespace hugh {
 
     namespace null {
       
-    namespace action {
+      namespace action {
       
-      // variables, exported
+        // variables, exported
   
-      // functions, exported
+        // functions, exported
 
-      /* explicit */
-      swap::swap(context& a)
-        : base(a)
-      {
-        TRACE("hugh::render::null::action::swap::swap");
-      }
+        /* explicit */
+        swap::swap(context& a)
+          : base(a)
+        {
+          TRACE("hugh::render::null::action::swap::swap");
+        }
 
-      /* virtual */
-      swap::~swap()
-      {
-        TRACE("hugh::render::null::action::swap::~swap");
-      }      
+        /* virtual */
+        swap::~swap()
+        {
+          TRACE("hugh::render::null::action::swap::~swap");
+        }      
       
-      /* virtual */ void
-      swap::do_execute(context::swap&)
-      {
-        TRACE("hugh::render::null::action::swap::do_execute");
-      }
+        /* virtual */ void
+        swap::do_execute(context::swap&)
+        {
+          TRACE("hugh::render::null::action::swap::do_execute");
+        }
       
-    } // namespace action {
+      } // namespace action {
 
     } // namespace null {
     
