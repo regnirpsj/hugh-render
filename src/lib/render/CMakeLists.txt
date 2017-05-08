@@ -26,19 +26,27 @@ list(APPEND SRC context/swap.cpp)
 
 list(APPEND SRC null/action/clear.cpp)
 list(APPEND SRC null/action/draw.cpp)
+#list(APPEND SRC null/action/setup.cpp)
 list(APPEND SRC null/action/swap.cpp)
 list(APPEND SRC null/context.cpp)
 list(APPEND SRC null/pass/standard.cpp)
+#list(APPEND SRC null/state/blend.cpp)
+#list(APPEND SRC null/state/depth_stencil.cpp)
 list(APPEND SRC null/state/raster.cpp)
+#list(APPEND SRC null/state/sampler.cpp)
 list(APPEND SRC null/window.cpp)
 
 list(APPEND SRC pass/base.cpp)
 list(APPEND SRC pass/container.cpp)
 
+list(APPEND SRC shader/base.cpp)
+
 list(APPEND SRC state/base.cpp)
 
 list(APPEND SRC statistics/base.cpp)
 list(APPEND SRC statistics/cpu.cpp)
+
+list(APPEND SRC target/base.cpp)
 
 list(APPEND SRC window/base.cpp)
 
