@@ -6,46 +6,60 @@
 /*                                                                                                */
 /**************************************************************************************************/
 /*                                                                                                */
-/*  module     :  hugh/render/test/null_action_swap.cpp                                           */
+/*  module     :  hugh/render/null/action/setup.hpp                                               */
 /*  project    :                                                                                  */
 /*  description:                                                                                  */
 /*                                                                                                */
 /**************************************************************************************************/
 
+#if !defined(HUGH_RENDER_NULL_ACTION_SETUP_HPP)
+
+#define HUGH_RENDER_NULL_ACTION_SETUP_HPP
+
 // includes, system
 
-#include <memory>  // std::unique_ptr<>
-#include <sstream> // std::ostringstream
+//#include <>
 
 // includes, project
 
-#include <hugh/render/null/action/swap.hpp>
+#include <hugh/render/null/context.hpp>
+#include <hugh/render/action/base.hpp>
 
-#define HUGH_USE_TRACE
-#undef HUGH_USE_TRACE
-#include <hugh/support/trace.hpp>
+namespace hugh {
 
-// internal unnamed namespace
+  namespace render {
 
-namespace {
+    namespace null {
+      
+      namespace action {
+      
+        // types, exported (class, enum, struct, union, typedef)
+
+        class HUGH_RENDER_EXPORT setup final : public render::action::base {
+
+        public:
+
+          explicit setup(context&);
+          virtual ~setup();
+        
+        protected:
+
+          virtual void do_execute(context::swap&);
+        
+        };
+      
+        // variables, exported (extern)
+
+        // functions, inlined (inline)
   
-  // types, internal (class, enum, struct, union, typedef)
+        // functions, exported (extern)
 
-  // variables, internal
+      } // namespace action {
+
+    } // namespace null {
+    
+  } // namespace render {
   
-  // functions, internal
+} // namespace hugh {
 
-} // namespace {
-
-#define BOOST_TEST_MAIN
-#include <boost/test/unit_test.hpp>
-
-BOOST_AUTO_TEST_CASE(test_hugh_render_null_action_swap_ctor)
-{
-  using namespace hugh::render::null;
-
-  context                             c;
-  std::unique_ptr<action::swap> const a(new action::swap(c));
-  
-  BOOST_CHECK(nullptr != a);
-}
+#endif // #if !defined(HUGH_RENDER_NULL_ACTION_SETUP_HPP)

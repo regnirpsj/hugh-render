@@ -6,46 +6,60 @@
 /*                                                                                                */
 /**************************************************************************************************/
 /*                                                                                                */
-/*  module     :  hugh/render/test/null_state_raster.cpp                                          */
+/*  module     :  hugh/render/null/shader/fragment.hpp                                            */
 /*  project    :                                                                                  */
 /*  description:                                                                                  */
 /*                                                                                                */
 /**************************************************************************************************/
 
+#if !defined(HUGH_RENDER_NULL_SHADER_FRAGMENT_HPP)
+
+#define HUGH_RENDER_NULL_SHADER_FRAGMENT_HPP
+
 // includes, system
 
-#include <memory>  // std::unique_ptr<>
-#include <sstream> // std::ostringstream
+//#include <>
 
 // includes, project
 
-#include <hugh/render/null/state/raster.hpp>
+#include <hugh/render/null/context.hpp>
+#include <hugh/render/shader/base.hpp>
 
-#define HUGH_USE_TRACE
-#undef HUGH_USE_TRACE
-#include <hugh/support/trace.hpp>
-
-// internal unnamed namespace
-
-namespace {
+namespace hugh {
   
-  // types, internal (class, enum, struct, union, typedef)
+  namespace render {
 
-  // variables, internal
+    namespace null {
+      
+      namespace shader {
+
+        // types, exported (class, enum, struct, union, typedef)
+
+        class HUGH_RENDER_EXPORT fragment final : public render::shader::base {
+
+        public:
+
+          explicit fragment(context&);
+          virtual ~fragment();
+
+        protected:
+
+          virtual void do_activate();
+          
+        };
+        
+        // variables, exported (extern)
+
+        // functions, inlined (inline)
   
-  // functions, internal
+        // functions, exported (extern)
 
-} // namespace {
+      } // namespace shader {
 
-#define BOOST_TEST_MAIN
-#include <boost/test/unit_test.hpp>
-
-BOOST_AUTO_TEST_CASE(test_hugh_render_null_state_raster_ctor)
-{
-  using namespace hugh::render::null;
-
-  context                              c;
-  std::unique_ptr<state::raster> const s(new state::raster(c));
+    } // namespace null {
+    
+  } // namespace render {
   
-  BOOST_CHECK(nullptr != s);
-}
+} // namespace hugh {
+
+#endif // #if !defined(HUGH_RENDER_NULL_SHADER_FRAGMENT_HPP)

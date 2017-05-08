@@ -6,20 +6,23 @@
 /*                                                                                                */
 /**************************************************************************************************/
 /*                                                                                                */
-/*  module     :  hugh/render/test/null_action_clear.cpp                                          */
+/*  module     :  hugh/render/null/shader/geometry.cpp                                            */
 /*  project    :                                                                                  */
 /*  description:                                                                                  */
 /*                                                                                                */
 /**************************************************************************************************/
 
+// include i/f header
+
+#include "hugh/render/null/shader/geometry.hpp"
+
 // includes, system
 
-#include <memory>  // std::unique_ptr<>
-#include <sstream> // std::ostringstream
+//#include <>
 
 // includes, project
 
-#include <hugh/render/null/action/clear.hpp>
+//#include <>
 
 #define HUGH_USE_TRACE
 #undef HUGH_USE_TRACE
@@ -37,15 +40,41 @@ namespace {
 
 } // namespace {
 
-#define BOOST_TEST_MAIN
-#include <boost/test/unit_test.hpp>
+namespace hugh {
 
-BOOST_AUTO_TEST_CASE(test_hugh_render_null_action_clear_ctor)
-{
-  using namespace hugh::render::null;
+  namespace render {
 
-  context                              c;
-  std::unique_ptr<action::clear> const a(new action::clear(c));
+    namespace null {
+      
+      namespace shader {
+        
+        // variables, exported
   
-  BOOST_CHECK(nullptr != a);
-}
+        // functions, exported
+        
+        /* explicit */
+        geometry::geometry(context& a)
+          : render::shader::base(a)
+        {
+          TRACE("hugh::render::null:shader::geometry::geometry");
+        }
+        
+        /* virtual */
+        geometry::~geometry()
+        {
+          TRACE("hugh::render::null:shader::geometry::~geometry");
+        }
+
+        /* virtual */ void
+        geometry::do_activate()
+        {
+          TRACE("hugh::render::null:shader::geometry::do_activate");
+        }
+
+      } // namespace shader {
+
+    } // namespace null {
+    
+  } // namespace render {
+  
+} // namespace hugh {

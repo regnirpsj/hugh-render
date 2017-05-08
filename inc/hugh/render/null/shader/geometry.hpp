@@ -6,46 +6,60 @@
 /*                                                                                                */
 /**************************************************************************************************/
 /*                                                                                                */
-/*  module     :  hugh/render/test/null_action_draw.cpp                                           */
+/*  module     :  hugh/render/null/shader/geometry.hpp                                            */
 /*  project    :                                                                                  */
 /*  description:                                                                                  */
 /*                                                                                                */
 /**************************************************************************************************/
 
+#if !defined(HUGH_RENDER_NULL_SHADER_GEOMETRY_HPP)
+
+#define HUGH_RENDER_NULL_SHADER_GEOMETRY_HPP
+
 // includes, system
 
-#include <memory>  // std::unique_ptr<>
-#include <sstream> // std::ostringstream
+//#include <>
 
 // includes, project
 
-#include <hugh/render/null/action/draw.hpp>
+#include <hugh/render/null/context.hpp>
+#include <hugh/render/shader/base.hpp>
 
-#define HUGH_USE_TRACE
-#undef HUGH_USE_TRACE
-#include <hugh/support/trace.hpp>
-
-// internal unnamed namespace
-
-namespace {
+namespace hugh {
   
-  // types, internal (class, enum, struct, union, typedef)
+  namespace render {
 
-  // variables, internal
+    namespace null {
+      
+      namespace shader {
+
+        // types, exported (class, enum, struct, union, typedef)
+
+        class HUGH_RENDER_EXPORT geometry final : public render::shader::base {
+
+        public:
+
+          explicit geometry(context&);
+          virtual ~geometry();
+
+        protected:
+
+          virtual void do_activate();
+          
+        };
+        
+        // variables, exported (extern)
+
+        // functions, inlined (inline)
   
-  // functions, internal
+        // functions, exported (extern)
 
-} // namespace {
+      } // namespace shader {
 
-#define BOOST_TEST_MAIN
-#include <boost/test/unit_test.hpp>
-
-BOOST_AUTO_TEST_CASE(test_hugh_render_null_action_draw_ctor)
-{
-  using namespace hugh::render::null;
-
-  context                             c;
-  std::unique_ptr<action::draw> const a(new action::draw(c));
+    } // namespace null {
+    
+  } // namespace render {
   
-  BOOST_CHECK(nullptr != a);
-}
+} // namespace hugh {
+
+#endif // #if !defined(HUGH_RENDER_NULL_SHADER_GEOMETRY_HPP)

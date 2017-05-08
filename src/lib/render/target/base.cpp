@@ -89,11 +89,12 @@ namespace hugh {
       }
 
       /* explicit */
-      base::base(context::device& a)
+      base::base(context::device& a, glm::uvec2 const& b)
         : support::printable       (),
           support::refcounted<base>(),
           ctx_                     (a),
-          stats_cpu_               ()
+          stats_cpu_               (),
+          size_                    (b)
       {
         TRACE("hugh::render::target::base::base");
 
@@ -112,13 +113,11 @@ namespace hugh {
       }
 
       /* virtual */ void
-      base::do_resize(glm::uvec2 const&)
+      base::do_resize(glm::uvec2 const& a)
       {
         TRACE("hugh::render::target::base::do_resize");
         
-        throw std::logic_error("pure virtual function "
-                               "'hugh::render::target::base::do_resize'"
-                               " called");
+        size_ = a;
       }
 
     } // namespace target {

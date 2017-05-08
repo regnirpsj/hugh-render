@@ -19,36 +19,36 @@ include_directories(SYSTEM ${HUGH_INCLUDE_DIRS})
 set(SRC)
 
 list(APPEND SRC action/base.cpp)
-
 list(APPEND SRC context/base.cpp)
 list(APPEND SRC context/device.cpp)
 list(APPEND SRC context/swap.cpp)
-
-list(APPEND SRC null/action/clear.cpp)
-list(APPEND SRC null/action/draw.cpp)
-#list(APPEND SRC null/action/setup.cpp)
-list(APPEND SRC null/action/swap.cpp)
-list(APPEND SRC null/context.cpp)
-list(APPEND SRC null/pass/standard.cpp)
-#list(APPEND SRC null/state/blend.cpp)
-#list(APPEND SRC null/state/depth_stencil.cpp)
-list(APPEND SRC null/state/raster.cpp)
-#list(APPEND SRC null/state/sampler.cpp)
-list(APPEND SRC null/window.cpp)
-
 list(APPEND SRC pass/base.cpp)
 list(APPEND SRC pass/container.cpp)
-
 list(APPEND SRC shader/base.cpp)
-
 list(APPEND SRC state/base.cpp)
-
 list(APPEND SRC statistics/base.cpp)
 list(APPEND SRC statistics/cpu.cpp)
-
 list(APPEND SRC target/base.cpp)
-
 list(APPEND SRC window/base.cpp)
+
+list(APPEND SRC null/context.cpp)
+list(APPEND SRC null/window.cpp)
+list(APPEND SRC null/action/clear.cpp)
+list(APPEND SRC null/action/draw.cpp)
+list(APPEND SRC null/action/setup.cpp)
+list(APPEND SRC null/action/swap.cpp)
+list(APPEND SRC null/pass/standard.cpp)
+list(APPEND SRC null/shader/compute.cpp)
+list(APPEND SRC null/shader/fragment.cpp)
+list(APPEND SRC null/shader/geometry.cpp)
+list(APPEND SRC null/shader/tessellation.cpp)
+list(APPEND SRC null/shader/vertex.cpp)
+list(APPEND SRC null/state/blend.cpp)
+list(APPEND SRC null/state/depth_stencil.cpp)
+list(APPEND SRC null/state/raster.cpp)
+list(APPEND SRC null/state/sampler.cpp)
+list(APPEND SRC null/target/color.cpp)
+list(APPEND SRC null/target/depth.cpp)
 
 #add_definitions(-DHUGH_ALL_TRACE)
 

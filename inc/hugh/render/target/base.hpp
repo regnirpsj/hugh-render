@@ -57,11 +57,13 @@ namespace hugh {
         
         context::device&        ctx_;
         statistics_cpu_map_type stats_cpu_;
+        glm::uvec2              size_;
         
-        explicit base(context::device&);
+        explicit base(context::device&  /* ctx  */,
+                      glm::uvec2 const& /* size */ = glm::uvec2(1,1));
 
-        virtual void do_invalidate()                             =0;
-        virtual void do_resize    (glm::uvec2 const& /* size */) =0;
+        virtual void do_invalidate() =0;
+        virtual void do_resize    (glm::uvec2 const& /* size */);
         
       };
     
