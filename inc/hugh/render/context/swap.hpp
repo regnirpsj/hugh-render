@@ -18,11 +18,13 @@
 
 // includes, system
 
-#include <glm/glm.hpp> // glm::*
+#include <glm/glm.hpp> // glm::uvec2
 
 // includes, project
 
+#include <hugh/field/adapter/single.hpp>
 #include <hugh/render/context/base.hpp>
+#include <hugh/render/interface/resizable.hpp>
 
 namespace hugh {
 
@@ -32,17 +34,25 @@ namespace hugh {
       
       // types, exported (class, enum, struct, union, typedef)
 
-      class HUGH_RENDER_EXPORT swap : virtual public base {
+      class HUGH_RENDER_EXPORT swap : virtual public base,
+                                      public interface::resizable {
 
       public:
 
-        field::value::single<glm::uvec2> size; //< size
+        field::adapter::single<glm::uvec2 const> size; //< size
 
-        virtual ~swap() =0;
+        virtual ~swap();
         
       protected:
         
         explicit swap(glm::uvec2 const&);
+
+        virtual void do_resize(glm::uvec2 const& /* size */);
+
+      private:
+
+        glm::uvec2 const& cb_get_size() const;
+        glm::uvec2        cb_set_size(glm::uvec2 const&);
         
       };
     

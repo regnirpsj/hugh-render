@@ -22,6 +22,7 @@
 
 // includes, project
 
+#include <hugh/render/context/swap.hpp>
 #include <hugh/render/export.h>
 
 namespace hugh {
@@ -38,13 +39,13 @@ namespace hugh {
         
         virtual ~executable();
 
-        void execute();
+        void execute(context::swap&);
       
       protected:
 
         explicit executable();
 
-        virtual void do_execute() =0;
+        virtual void do_execute(context::swap&) =0;
       
       };
       

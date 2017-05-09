@@ -71,6 +71,14 @@ namespace hugh {
           TRACE("hugh::render::null:target::color::do_invalidate");
         }
 
+        /* virtual */ void
+        color::do_resize(glm::uvec2 const& a)
+        {
+          TRACE("hugh::render::null:target::color::do_resize");
+
+          size_ = a;
+        }
+        
       } // namespace target {
 
     } // namespace null {

@@ -18,7 +18,7 @@
 
 // includes, system
 
-#include <stdexcept> // std::logic_error
+//#include <>
 
 // includes, project
 
@@ -55,16 +55,6 @@ namespace hugh {
       {
         TRACE("hugh::render::state::base::~base");
       }
-      
-      void
-      base::apply()
-      {
-        TRACE("hugh::render::state::base::apply");
-        
-        statistics::guard const sg(*stats_cpu_[stats::apply]);
-
-        do_apply();
-      }
 
       /* virtual */ void
       base::print_on(std::ostream& os) const
@@ -72,31 +62,18 @@ namespace hugh {
         TRACE_NEVER("hugh::render::state::base::print_on");
         
         os << '['
-           << ctx_                                               << ','
-           << "aply:" << *(stats_cpu_.at(stats::apply)->fetch()) << ','
+           << ctx_
            << ']';
       }
       
       /* explicit */
       base::base(context::device& a)
-        : support::printable       (),
+        : interface::applicable    (),
+          support::printable       (),
           support::refcounted<base>(),
-          ctx_                     (a),
-          stats_cpu_               ()
+          ctx_                     (a)
       {
         TRACE("hugh::render::state::base::base");
-
-        stats_cpu_[stats::apply].reset(new statistics::cpu);
-      }
-
-      /* virtual */ void
-      base::do_apply()
-      {
-        TRACE("hugh::render::state::base::do_apply");
-
-        throw std::logic_error("pure virtual function "
-                               "'hugh::render::state::base::do_apply'"
-                               " called");
       }
 
     } // namespace state {

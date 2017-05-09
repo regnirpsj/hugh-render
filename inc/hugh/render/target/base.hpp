@@ -18,14 +18,13 @@
 
 // includes, system
 
-#include <memory>        // std::unique_ptr<>
-#include <unordered_map> // std::unordered_map<>
+//#include <>
 
 // includes, project
 
 #include <hugh/render/context/device.hpp>
-#include <hugh/render/context/swap.hpp>
-#include <hugh/render/statistics/cpu.hpp>
+#include <hugh/render/interface/invalidatable.hpp>
+#include <hugh/render/interface/resizable.hpp>
 
 namespace hugh {
 
@@ -35,35 +34,23 @@ namespace hugh {
       
       // types, exported (class, enum, struct, union, typedef)
 
-      class HUGH_RENDER_EXPORT base : public support::printable,
+      class HUGH_RENDER_EXPORT base : public interface::invalidatable,
+                                      public interface::resizable,
+                                      public support::printable,
                                       public support::refcounted<base> {
 
       public:
       
         virtual ~base();
 
-        void invalidate();
-        void resize    (glm::uvec2 const& /* size */);
-
         virtual void print_on(std::ostream&) const;
 
       protected:
 
-        enum class stats {
-          invalidate = 1, resize = 2
-        };
-
-        using statistics_cpu_map_type = std::unordered_map<stats, std::unique_ptr<statistics::cpu>>;
-        
-        context::device&        ctx_;
-        statistics_cpu_map_type stats_cpu_;
-        glm::uvec2              size_;
+        context::device& ctx_;
         
         explicit base(context::device&  /* ctx  */,
                       glm::uvec2 const& /* size */ = glm::uvec2(1,1));
-
-        virtual void do_invalidate() =0;
-        virtual void do_resize    (glm::uvec2 const& /* size */);
         
       };
     

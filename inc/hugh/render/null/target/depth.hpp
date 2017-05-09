@@ -46,6 +46,7 @@ namespace hugh {
         protected:
           
           virtual void do_invalidate();
+          virtual void do_resize    (glm::uvec2 const& /* size */);
           
         };
         

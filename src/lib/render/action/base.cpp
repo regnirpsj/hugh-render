@@ -18,7 +18,7 @@
 
 // includes, system
 
-#include <stdexcept> // std::logic_error
+//#include <>
 
 // includes, project
 
@@ -54,59 +54,7 @@ namespace hugh {
       base::~base()
       {
         TRACE("hugh::render::action::base::~base");
-      }
-      
-      void
-      base::execute(context::swap& a)
-      {
-        TRACE("hugh::render::action::base::execute");
-
-        statistics::guard const sg(*stats_cpu_[stats::execute]);
-
-        if (active_) {
-          do_execute(a);
-        }
-      }
-      
-      /* virtual */ void
-      base::invalidate()
-      {
-        TRACE("hugh::render::action::base::invalidate");
-
-        statistics::guard const sg(*stats_cpu_[stats::invalidate]);
-
-        do_invalidate();
-      }
-
-      /* virtual */ void
-      base::resize(glm::uvec2 const& a)
-      {
-        TRACE("hugh::render::action::base::resize");
-
-        statistics::guard const sg(*stats_cpu_[stats::resize]);
-
-        do_resize(a);
-      }
-
-      bool const&
-      base::active() const
-      {
-        TRACE("hugh::render::action::base::active(get)");
-
-        return active_;
-      }
-
-      bool
-      base::active(bool a)
-      {
-        TRACE("hugh::render::action::base::active(set)");
-
-        bool const result(active_);
-
-        active_ = a;
-        
-        return result;
-      }
+      }      
 
       /* virtual */ void
       base::print_on(std::ostream& os) const
@@ -114,39 +62,22 @@ namespace hugh {
         TRACE_NEVER("hugh::render::action::base::print_on");
 
         os << '['
-           << ctx_                                                    << ','
-           << ((active_) ? "" : "!") << "active"                      << ','
-           << "exec:" << *(stats_cpu_.at(stats::execute)   ->fetch()) << ','
-           << "invd:" << *(stats_cpu_.at(stats::invalidate)->fetch()) << ','
-           << "resz:" << *(stats_cpu_.at(stats::resize)    ->fetch())
+           << ctx_
            << ']';
       }
 
       /* explicit */
       base::base(context::device& a)
-        : support::printable       (),
+        : interface::executable    (),
+          interface::invalidatable (),
+          interface::resizable     (),
+          support::printable       (),
           support::refcounted<base>(),
-          ctx_                     (a),
-          active_                  (true),
-          stats_cpu_               ()
+          ctx_                     (a)
       {
         TRACE("hugh::render::action::base::base");
-
-        stats_cpu_[stats::execute]   .reset(new statistics::cpu);
-        stats_cpu_[stats::invalidate].reset(new statistics::cpu);
-        stats_cpu_[stats::resize]    .reset(new statistics::cpu);
       }
 
-      /* virtual */ void
-      base::do_execute(context::swap&)
-      {
-        TRACE("hugh::render::action::base::do_execute");
-
-        throw std::logic_error("pure virtual function "
-                               "'hugh::render::action::base::do_execute'"
-                               " called");
-      }
-      
       /* virtual */ void
       base::do_invalidate()
       {

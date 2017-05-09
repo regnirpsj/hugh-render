@@ -14,6 +14,7 @@
 
 // includes, system
 
+#include <array>   // std::array<>
 #include <memory>  // std::unique_ptr<>
 #include <sstream> // std::ostringstream
 
@@ -86,22 +87,6 @@ BOOST_AUTO_TEST_CASE(test_hugh_render_null_pass_container_print_on)
   }
 }
 
-BOOST_AUTO_TEST_CASE(test_hugh_render_null_pass_container_active)
-{
-  TRACE("test_hugh_render_null_pass_container_active");
-  
-  using namespace hugh::render;
-
-  null::context                    c;
-  std::unique_ptr<pass::container> p(new pass::container(c));
-  
-  BOOST_CHECK(nullptr != p);
-  
-  BOOST_CHECK( true == p->active());
-  BOOST_CHECK( true == p->active(false));
-  BOOST_CHECK(false == p->active());
-}
-
 BOOST_AUTO_TEST_CASE(test_hugh_render_null_pass_container_execute)
 {
   TRACE("test_hugh_render_null_pass_container_execute");
@@ -113,10 +98,16 @@ BOOST_AUTO_TEST_CASE(test_hugh_render_null_pass_container_execute)
   
   BOOST_CHECK(nullptr != p);
 
-  p->add(new null::action::clear(c));
-  p->add(new null::action::draw (c));
-  p->add(new null::action::swap (c));
+  std::array<action::base*, 3> const actions = {
+    new null::action::clear(c),
+    new null::action::draw (c),
+    new null::action::swap (c)
+  };
 
+  for (auto a : actions) {
+    p->add(a);
+  }
+  
   for (unsigned i(0); i < loop_limit; ++i) {
     p->invalidate();
     p->resize    (*c.size);

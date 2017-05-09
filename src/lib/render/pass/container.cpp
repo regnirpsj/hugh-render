@@ -117,10 +117,8 @@ namespace hugh {
       {
         TRACE("hugh::render::pass::container::do_execute");
 
-        if (active_) {
-          for (auto& s : actions_) {
-            s->execute(a);
-          }
+        for (auto& s : actions_) {
+          s->execute(a);
         }
       }
       

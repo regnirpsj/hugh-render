@@ -77,22 +77,6 @@ BOOST_AUTO_TEST_CASE(test_hugh_render_null_pass_standard_print_on)
   BOOST_TEST_MESSAGE( ostr.str());
 }
 
-BOOST_AUTO_TEST_CASE(test_hugh_render_null_pass_standard_active)
-{
-  TRACE("test_hugh_render_null_pass_standard_active");
-  
-  using namespace hugh::render::null;
-
-  context                         c;
-  std::unique_ptr<pass::standard> p(new pass::standard(c));
-  
-  BOOST_CHECK(nullptr != p);
-
-  BOOST_CHECK( true == p->active());
-  BOOST_CHECK( true == p->active(false));
-  BOOST_CHECK(false == p->active());
-}
-
 BOOST_AUTO_TEST_CASE(test_hugh_render_null_pass_standard_execute)
 {
   TRACE("test_hugh_render_null_pass_standard_execute");

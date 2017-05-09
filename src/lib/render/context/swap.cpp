@@ -59,12 +59,43 @@ namespace hugh {
       
       /* explicit */
       swap::swap(glm::uvec2 const& a)
-        : base(),
-          size(*this, "size", a)
+        : base                (),
+          interface::resizable(a),
+          size                (*this, "size",
+                               std::bind(&swap::cb_get_size, this),
+                               std::bind(&swap::cb_set_size, this, std::placeholders::_1))
       {
         TRACE("hugh::render::context::swap::swap");
       }
       
+      /* virtual */ void
+      swap::do_resize(glm::uvec2 const& a)
+      {
+        TRACE("hugh::render::context::swap::do_resize");
+        
+        size_ = a;
+      }
+      
+      glm::uvec2 const&
+      swap::cb_get_size() const
+      {
+        TRACE("hugh::render::context::swap::cb_get_size");
+        
+        return size_;
+      }
+      
+      glm::uvec2
+      swap::cb_set_size(glm::uvec2 const& a)
+      {
+        TRACE("hugh::render::context::swap::cb_set_size");
+        
+        glm::uvec2 const result(size_);
+
+        resize(a);
+
+        return result;
+      }
+
     } // namespace context {
 
   } // namespace render {

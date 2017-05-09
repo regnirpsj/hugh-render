@@ -57,11 +57,11 @@ namespace hugh {
       }
       
       void
-      executable::execute()
+      executable::execute(context::swap& a)
       {
         TRACE("hugh::render::interface::executable::execute");
 
-        do_execute();
+        do_execute(a);
       }
 
       /* explicit */
@@ -71,7 +71,7 @@ namespace hugh {
       }
 
       /* virtual */ void
-      executable::do_execute()
+      executable::do_execute(context::swap&)
       {
         TRACE("hugh::render::interface::executable::do_execute");
 
